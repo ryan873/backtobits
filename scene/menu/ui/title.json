@@ -32,7 +32,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":38,
          "x":0,
          "y":0
@@ -140,7 +140,7 @@
                 }],
          "opacity":0.490000009536743,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":38,
          "x":0,
          "y":0
@@ -152,15 +152,15 @@
          "objects":[
                 {
                  "gid":4,
-                 "height":386,
+                 "height":480,
                  "id":1,
                  "name":"logo",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":736,
-                 "x":256,
-                 "y":480
+                 "width":640,
+                 "x":319,
+                 "y":539
                 }],
          "opacity":1,
          "type":"objectgroup",
