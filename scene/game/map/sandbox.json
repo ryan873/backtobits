@@ -1484,9 +1484,17 @@
          "objects":[
                 {
                  "gid":22,
-                 "height":160,
+                 "height":192,
                  "id":58,
                  "name":"hero",
+                 "properties":
+                    {
+                     "song":"venus.ogg"
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
                  "rotation":0,
                  "type":"hero",
                  "visible":true,
@@ -1625,19 +1633,7 @@
          "draworder":"topdown",
          "height":31,
          "name":"above",
-         "objects":[
-                {
-                 "gid":19,
-                 "height":32,
-                 "id":118,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":224,
-                 "x":481,
-                 "y":997
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

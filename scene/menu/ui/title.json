@@ -1,4 +1,4 @@
-{ "backgroundcolor":"#3b97d3",
+{ "backgroundcolor":"#000000",
  "height":26,
  "layers":[
         {
@@ -151,16 +151,16 @@
          "name":"title",
          "objects":[
                 {
-                 "gid":4,
-                 "height":480,
-                 "id":1,
+                 "gid":9,
+                 "height":750,
+                 "id":38,
                  "name":"logo",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":640,
-                 "x":319,
-                 "y":539
+                 "width":1334,
+                 "x":-60,
+                 "y":790
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -207,8 +207,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":485,
-                 "y":655.333333333333
+                 "x":540,
+                 "y":734.333333333333
                 }, 
                 {
                  "gid":1,
@@ -219,8 +219,8 @@
                  "type":"",
                  "visible":true,
                  "width":192,
-                 "x":515.599635905335,
-                 "y":761.206553703963
+                 "x":995.599635905335,
+                 "y":723.206553703963
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -229,7 +229,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":38,
+ "nextobjectid":39,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -240,7 +240,7 @@
          "margin":0,
          "name":"ui",
          "spacing":0,
-         "tilecount":7,
+         "tilecount":8,
          "tileheight":832,
          "tiles":
             {
@@ -271,9 +271,13 @@
              "7":
                 {
                  "image":"cloud.png"
+                },
+             "8":
+                {
+                 "image":"backtobits_title.png"
                 }
             },
-         "tilewidth":1232
+         "tilewidth":1334
         }],
  "tilewidth":32,
  "version":1,

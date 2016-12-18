@@ -14,15 +14,31 @@ local map, hero, shield, parallax
 function scene:create( event )
   local sceneGroup = self.view -- add display objects to this group
 
+  -- start physics before loading map
+  physics.start()  
+  physics.setGravity(0, 32)
+
+  -- load our map
+  local filename = event.params.map or "scene/game/map/sandbox.json"  
+  local mapData = json.decodeFile(system.pathForFile(filename, system.ResourceDirectory))
+  map = tiled.new(mapData, "scene/game/map")
+  --map.xScale, map.yScale = 0.85, 0.85
+
+  local song = "venus.ogg"
+
   -- sounds
   local sndDir = "scene/game/sfx/"
   scene.sounds = {
     
+    levelMusic = audio.loadSound(sndDir .. "loops/" .. song),
+    
+    --[[
     eightbitface = audio.loadSound( sndDir .. "loops/8bitface.ogg" ),
     backto8bit = audio.loadSound( sndDir .. "loops/backto8bit.ogg" ),
     ladders = audio.loadSound( sndDir .. "loops/ladders.ogg" ),
     playstation = audio.loadSound( sndDir .. "loops/playstation.ogg" ),
     venus = audio.loadSound( sndDir .. "loops/venus.ogg" ),
+    ]]--
     
     thud = audio.loadSound( sndDir .. "thud.wav" ),
     sword = audio.loadSound( sndDir .. "sword.wav" ),
@@ -37,15 +53,6 @@ function scene:create( event )
     coin = audio.loadSound( sndDir .. "coin.wav" ),  
   }
 
-  -- start physics befor loading map
-  physics.start()  
-  physics.setGravity(0, 32)
-
-  -- load our map
-  local filename = event.params.map or "scene/game/map/sandbox.json"  
-  local mapData = json.decodeFile(system.pathForFile(filename, system.ResourceDirectory))
-  map = tiled.new(mapData, "scene/game/map")
-  --map.xScale, map.yScale = 0.85, 0.85
 
   -- find our hero!
   map.extensions = "scene.game.lib."
@@ -104,7 +111,7 @@ function scene:show( event )
   if ( phase == "will" ) then
     Runtime:addEventListener("enterFrame", enterFrame)
   elseif ( phase == "did" ) then
-    audio.play(self.sounds.playstation, { loops = -1, fadein = 0, channel = 15 } )
+    audio.play(self.sounds.levelMusic, { loops = -1, fadein = 0, channel = 15 } )
   end
 end
 

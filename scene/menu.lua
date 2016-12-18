@@ -23,7 +23,7 @@ function scene:create( event )
   local start = ui:findObject("start")
   function start:tap()
     fx.fadeOut(function ()
-        composer.gotoScene( "scene.game", { params = { } })
+        composer.gotoScene( "scene.game", { params = {map="scene/game/map/level1.json"} })
       end)
   end
   fx.breath(start)
