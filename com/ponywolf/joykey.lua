@@ -1,87 +1,88 @@
--- joykey
+
+-- joykey 0.1
 
 -- Re-broadcast joystick axis events as arrow keys
--- Adds new "key" events axis1+, axis1-, axis2+, etc...
+
+-- This module turns gamepad axis events into keyboard events
+-- so we don't have to write separate code for joystick and keyboard control.
+-- Just add this line to your main.lua:
+-- require( "com.ponywolf.joykey" ).start()
 
 local M = {}
 local deadZone = 0.333
+
+-- Store previous events
 local eventCache = {}
 
-local function onAxisEvent( event )
-  local num = event.axis.number or 1
-  local name = "axis" .. num
-  local value = event.normalizedValue
-  local oppositeAxis = "none"
+-- Store key mappings
+local map = {}
 
-  event.name = "key" -- overide event type
+-- Map the axis to arrow keys and wsad
+map["axis1-"] = "left"
+map["axis1+"] = "right"
+map["axis2-"] = "up"
+map["axis2+"] = "down"
 
-  -- set axis raw numbers
-  if value > 0 then
-    event.keyName = name .. "+"
-    oppositeAxis = name .. "-"
-  elseif value < 0 then
-    event.keyName = name .. "-"
-    oppositeAxis = name .. "+"      
-  end
+map["axis3-"] = "a"
+map["axis3+"] = "d"
+map["axis4-"] = "w"
+map["axis4+"] = "s"
 
-  if value == 0 then return false end
-  if math.abs(value) > deadZone then
-    if eventCache[oppositeAxis] then
-      event.phase = "up"      
-      eventCache[oppositeAxis] = false
-      event.keyName = oppositeAxis
-      Runtime:dispatchEvent(event)
-    end  
-    if not eventCache[event.keyName] then
-      event.phase = "down"      
-      eventCache[event.keyName] = true
-      Runtime:dispatchEvent(event)
-    end    
-  else
-    if eventCache[event.keyName] then
-      event.phase = "up"      
-      eventCache[event.keyName] = false
-      Runtime:dispatchEvent(event)
-    end
-    if eventCache[oppositeAxis] then
-      event.phase = "up"      
-      eventCache[oppositeAxis] = false
-      event.keyName = oppositeAxis
-      Runtime:dispatchEvent(event)
-    end     
-  end
-end
+-- Capture the axis event
+local function axis( event )
+	local num = event.axis.number or 1
+	local name = "axis" .. num
+	local value = event.normalizedValue
+	local oppositeAxis = "none"
 
-local function onAccelerate( event )
-  deadZone = 0.075 -- reduce for accelometer events
-  event.axis = {}
-  event.axis.number = 1 
-  event.normalizedValue = -event.yGravity 
-  onAxisEvent( event )
-  event.axis.number = 2 
-  event.normalizedValue = event.xGravity 
-  onAxisEvent( event )  
---  event.axis.number = 3 
---  event.normalizedValue = event.zGravity 
---  onAxisEvent( event )  
+	event.name = "key"  -- Overide event type
+
+	-- Set map axis to key
+	if value > 0 then
+		event.keyName = map[name .. "+"]
+		oppositeAxis = map[name .. "-"]
+	elseif value < 0 then
+		event.keyName = map[name .. "-"]
+		oppositeAxis = map[name .. "+"]
+	else
+		-- We had an exact 0 so throw both key up events for this axis
+		event.keyName = map[name .. "-"]
+		oppositeAxis = map[name .. "+"]
+	end
+
+	if math.abs(value) > deadZone then
+		-- Throw the opposite axis if it was last pressed
+		if eventCache[oppositeAxis] then
+			event.phase = "up"
+			eventCache[oppositeAxis] = false
+			event.keyName = oppositeAxis
+			Runtime:dispatchEvent( event )
+		end
+		-- Throw this axis if it wasn't last pressed
+		if not eventCache[event.keyName] then
+			event.phase = "down"
+			eventCache[event.keyName] = true
+			Runtime:dispatchEvent( event )
+		end
+	else
+		-- We're back toward center
+		if eventCache[event.keyName] then
+			event.phase = "up"
+			eventCache[event.keyName] = false
+			Runtime:dispatchEvent( event )
+		end
+		if eventCache[oppositeAxis] then
+			event.phase = "up"
+			eventCache[oppositeAxis] = false
+			event.keyName = oppositeAxis
+			Runtime:dispatchEvent( event )
+		end
+	end
+	return true
 end
 
 function M.start()
-  -- make a clear touch area
-  local screen = display.newRect(display.contentCenterX, display.contentCenterY, display.actualContentWidth, display.actualContentHeight)
-  screen.isHitTestable = true
-  screen.isVisible = false
-  function screen:touch(event)
-    if event.phase == "began" then
-      Runtime:dispatchEvent({name = "key", keyName = "screen", phase = "down" } )
-    elseif event.phase == "ended" or event.phase == "cancel" then
-      Runtime:dispatchEvent({name = "key", keyName = "screen", phase = "up" } )
-    end
-  end
-  -- add listeners
-  screen:addEventListener( "touch" )
-  Runtime:addEventListener( "axis", onAxisEvent )
-  Runtime:addEventListener( "accelerometer", onAccelerate )
+	Runtime:addEventListener( "axis", axis )
 end
 
 return M

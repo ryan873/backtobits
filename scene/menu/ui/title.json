@@ -176,15 +176,15 @@
          "objects":[
                 {
                  "gid":3,
-                 "height":715.669407858419,
+                 "height":352,
                  "id":26,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":745.251573276788,
-                 "x":237.507948400548,
-                 "y":739.425850721188
+                 "width":512,
+                 "x":416,
+                 "y":608
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -207,8 +207,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":540,
-                 "y":734.333333333333
+                 "x":544,
+                 "y":704
                 }, 
                 {
                  "gid":1,
@@ -219,8 +219,8 @@
                  "type":"",
                  "visible":true,
                  "width":192,
-                 "x":995.599635905335,
-                 "y":723.206553703963
+                 "x":576,
+                 "y":768
                 }],
          "opacity":1,
          "type":"objectgroup",
