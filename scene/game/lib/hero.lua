@@ -73,6 +73,7 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
+			audio.play( sounds.jump )
 			self:applyLinearImpulse( 0, -760 ) --550
 			instance:setSequence( "jump" )
 			self.jumping = true

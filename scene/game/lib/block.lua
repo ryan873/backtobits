@@ -1,5 +1,5 @@
 
--- Extends an object to act as a pickup
+-- Extends an object to act as a box
 
 -- Define module
 local M = {}
@@ -16,16 +16,11 @@ function M.new( instance )
 	function instance:collision( event )
 
 		local phase, other = event.phase, event.other
-		if phase == "began" and other.type == "hero" then
-			audio.play( sounds.lazer )
-			scene.score:add( 100 )
-			display.remove( self )
+		if phase == "began" and other.type == "block" then
+--			audio.play( sounds.boxbump)
 		end
 	end
 
-	instance._y = instance.y
-	physics.addBody( instance, "static", { isSensor = true } )
-	transition.from( instance, { y = instance._y - 16, transition = easing.outBounce, time = 500, iterations = -1 } )
 	instance:addEventListener( "collision" )
 
 	return instance

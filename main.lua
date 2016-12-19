@@ -65,7 +65,7 @@ require( "com.ponywolf.joykey" ).start()
 system.activate("multitouch")
 if isMobile or isSimulator then
 	local vjoy = require( "com.ponywolf.vjoy" )
-	local stick = vjoy.newStick(1, 32, "img/dpad.png")
+	local stick = vjoy.newStick(1, 48, "img/dpad.png")
 	stick.x, stick.y = 128, display.contentHeight - 128
 	local button = vjoy.newButton("buttonA","img/buttonA.png")
 	button.x, button.y = display.contentWidth - 128, display.contentHeight - 128
@@ -76,7 +76,8 @@ end
 audio.reserveChannels(1)
 
 -- go to menu screen
-composer.gotoScene( "scene.menu", { params={ } } )
+--composer.gotoScene( "scene.menu", { params={ } } )
+composer.gotoScene( "scene.game", { params={ map="scene/game/map/level2.json" } } )
 
 -- Or, instead of the line above, you can cheat skip to a specific level by using the
 -- following line, passing to it the JSON file of the level you want to jump to

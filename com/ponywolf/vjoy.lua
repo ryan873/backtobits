@@ -19,7 +19,7 @@ function M.newButton( key, radius )
 		instance.strokeWidth = 6
 		instance:setStrokeColor( 1, 1, 1, 1 )
 	else
-		instance = display.newImage( radius, 128,128 )
+		instance = display.newImage( radius, 192, 192 )
 	end
 
 	function instance:touch( event )
@@ -53,7 +53,7 @@ end
 function M.newStick( startAxis, innerRadius, outerRadius )
 
 	startAxis = startAxis or 1
-	innerRadius, outerRadius = innerRadius or 48, outerRadius or 96
+	innerRadius, outerRadius = innerRadius or 64, outerRadius or 96
 	local instance = display.newGroup()
 
 	local outerArea
@@ -63,7 +63,8 @@ function M.newStick( startAxis, innerRadius, outerRadius )
 		outerArea:setFillColor( 0.2, 0.2, 0.2, 0.9 )
 		outerArea:setStrokeColor( 1, 1, 1, 1 )
 	else
-		outerArea = display.newImage( outerRadius, 128, 128)
+		outerArea = display.newImage( outerRadius, 192, 192)
+    outerArea.x = 128
     outerArea.y = display.contentHeight - 128
 		outerRadius = ( outerArea.contentWidth + outerArea.contentHeight ) * 0.25
 	end

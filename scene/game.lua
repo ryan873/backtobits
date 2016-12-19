@@ -9,7 +9,7 @@ local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
 
 -- Variables local to scene
-local map, hero, shield, parallax
+local map, hero, shield, parallax1, parallax2, parallax3
 
 -- Create a new Composer scene
 local scene = composer.newScene()
@@ -50,6 +50,11 @@ function scene:create( event )
 		},
 		hit = audio.loadSound( sndDir .. "hit.wav" ),
 		coin = audio.loadSound( sndDir .. "coin.wav" ),
+		victory = audio.loadSound( sndDir .. "victory.wav" ),
+		lazer = audio.loadSound( sndDir .. "lazer.wav" ),
+		pbr = audio.loadSound( sndDir .. "pbr.wav" ),
+		jump = audio.loadSound( sndDir .. "jump.wav" ),
+		boxbump = audio.loadSound( sndDir .. "boxbump.wav" )
 	}
 
 
@@ -60,10 +65,12 @@ function scene:create( event )
 	hero.filename = filename
 
 	-- Find our enemies and other items
-	map:extend( "pbr", "blob", "enemy", "exit", "coin", "spikes" )
+	map:extend( "pbr", "blob", "enemy", "exit", "coin", "spikes", "block" )
 
 	-- Find the parallax layer
-	parallax = map:findLayer( "parallax" )
+	parallax1 = map:findLayer( "parallax1" )
+	parallax2 = map:findLayer( "parallax2" )
+	parallax3 = map:findLayer( "parallax3" )
 
 	-- Add our scoring module
 	local gem = display.newImageRect( sceneGroup, "scene/game/img/gem.png", 64, 64 )
@@ -108,8 +115,14 @@ local function enterFrame( event )
 		x, y = display.contentCenterX - x, display.contentCenterY - y
 		map.x, map.y = map.x + x, map.y + y
 		-- Easy parallax
-		if parallax then
-			parallax.x, parallax.y = map.x / 6, map.y / 8  -- Affects x more than y
+		if parallax3 then -- totally static parallax
+			parallax3.x, parallax3.y = hero.x - parallax3.width/2, map.y / 8 + parallax2.height/4 -- Affects x more than y
+		end
+		if parallax2 then -- more static parallax
+			parallax2.x, parallax2.y = hero.x - parallax2.width/2 + map.x * .01 - 256, map.y / 8 + parallax2.height/7 -- Affects x more than y
+		end
+		if parallax1 then -- more dynamic parallax
+			parallax1.x, parallax1.y = hero.x - parallax1.width/2 + map.x * .05, parallax1.y -- + map.y / 8 -- Affects x more than y
 		end
 	end
 end
