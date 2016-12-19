@@ -35,12 +35,12 @@ function M.new( instance, options )
 	instance:setSequence( "idle" )
 
 	-- Add physics
-	physics.addBody( instance, "dynamic", { radius = 54, density = 3, bounce = 0, friction =  1.0 } )
+	physics.addBody( instance, "dynamic", { radius = 58, density = 3, bounce = 0, friction =  1.0 } )
 	instance.isFixedRotation = true
 	instance.anchorY = 0.77
 
 	-- Keyboard control
-	local max, acceleration, left, right, flip = 375, 5000, 0, 0, 0
+	local max, acceleration, left, right, flip = 375, 7000, 0, 0, 0
 	local lastEvent = {}
 	local function key( event )
 		local phase = event.phase
@@ -49,11 +49,11 @@ function M.new( instance, options )
 		if phase == "down" then
 			if "left" == name or "a" == name then
 				left = -acceleration
-				flip = -0.133
+				flip = -0.333
 			end
 			if "right" == name or "d" == name then
 				right = acceleration
-				flip = 0.133
+				flip = 0.333
 			elseif "space" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
@@ -73,7 +73,7 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
-			self:applyLinearImpulse( 0, -550 )
+			self:applyLinearImpulse( 0, -760 ) --550
 			instance:setSequence( "jump" )
 			self.jumping = true
 		end

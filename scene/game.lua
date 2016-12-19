@@ -21,7 +21,7 @@ function scene:create( event )
 
 	-- Start physics before loading map
 	physics.start()
-	physics.setGravity( 0, 32 )
+	physics.setGravity( 0, 48 )
 
 	-- Load our map
 	local filename = event.params.map or "scene/game/map/sandbox.json"

@@ -60,15 +60,17 @@ end
 -- events so we don't have to write separate code for joystick, tilt, and keyboard control
 require( "com.ponywolf.joykey" ).start()
 
+
 -- add virtual joysticks to mobile 
 system.activate("multitouch")
 if isMobile or isSimulator then
 	local vjoy = require( "com.ponywolf.vjoy" )
-	local stick = vjoy.newStick()
+	local stick = vjoy.newStick(1, 32, "img/dpad.png")
 	stick.x, stick.y = 128, display.contentHeight - 128
-	local button = vjoy.newButton()
+	local button = vjoy.newButton("buttonA","img/buttonA.png")
 	button.x, button.y = display.contentWidth - 128, display.contentHeight - 128
 end
+
 
 -- reserve music channel
 audio.reserveChannels(1)

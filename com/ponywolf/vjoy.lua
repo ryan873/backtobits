@@ -19,7 +19,7 @@ function M.newButton( key, radius )
 		instance.strokeWidth = 6
 		instance:setStrokeColor( 1, 1, 1, 1 )
 	else
-		instance = display.newImage( instance, radius, 0, 0 )
+		instance = display.newImage( radius, 128,128 )
 	end
 
 	function instance:touch( event )
@@ -63,16 +63,17 @@ function M.newStick( startAxis, innerRadius, outerRadius )
 		outerArea:setFillColor( 0.2, 0.2, 0.2, 0.9 )
 		outerArea:setStrokeColor( 1, 1, 1, 1 )
 	else
-		outerArea = display.newImage( instance, outerRadius, 0, 0 )
+		outerArea = display.newImage( outerRadius, 128, 128)
+    outerArea.y = display.contentHeight - 128
 		outerRadius = ( outerArea.contentWidth + outerArea.contentHeight ) * 0.25
 	end
 
 	local joystick
 	if type( innerRadius ) == "number" then
 		joystick = display.newCircle( instance, 0,0, innerRadius )
-		joystick:setFillColor( 0.4, 0.4, 0.4, 0.9 )
-		joystick.strokeWidth = 6
-		joystick:setStrokeColor( 1, 1, 1, 1 )
+		joystick:setFillColor( 0.4, 0.4, 0.4, 0.3 )
+		joystick.strokeWidth = 4
+		joystick:setStrokeColor( 1, 0, 0.25, 0.5 )
 	else
 		joystick = display.newImage( instance, innerRadius, 0, 0 )
 		innerRadius = ( joystick.contentWidth + joystick.contentHeight ) * 0.25
