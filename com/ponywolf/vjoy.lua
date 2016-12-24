@@ -4,6 +4,11 @@
 -- A virtual joystick and button system that emulates
 -- an xBox controller axis/button events
 
+--local vibrator = require('plugin.vibrator') -- trying to do haptic feedback on virtual controller
+
+
+
+
 local M = {}
 local stage = display.getCurrentStage()
 
@@ -29,6 +34,32 @@ function M.newButton( key, radius )
 			self.xScale, self.yScale = 0.95, 0.95
 			local keyEvent = { name = "key", phase = "down", keyName = key or "none" }
 			Runtime:dispatchEvent( keyEvent )
+      
+--      system.vibrate() -- haptic here?
+--[[
+    if (vibrator.hasVibrator()) then
+     -- native.showAlert('Has vibrator?', tostring(vibrator.hasVibrator()), {'OK'})
+        native.showAlert('vibrate?','yes!',{'OK'})
+        vibrator.vibrate(1000)
+--      vibrator.vibrate({100, 500,  200, 250}, 1)
+    end
+  ]]--
+  
+  --[[
+    local haptic = vibrator.newHaptic('impact','heavy')
+--    native.showAlert('haptic?',tostring(vibrator.newHaptic()),{'OK'})
+    haptic:prepare() -- prepare decreses invoke() latency
+    timer.performWithDelay(500, function()
+        print('is it vibrating?')
+     --native.showAlert('haptic?','yes!',{'OK'})
+      -- Call invoke() when you want - right away or after a short delay when action actually happened.
+      -- Creating and preparing the haptc object before the actual action improves latency.
+      haptic:invoke()
+    end)
+    
+  ]]--
+      
+      
 		elseif phase=="ended" or phase == "canceled" then
 			if event.id then stage:setFocus( nil, event.id ) end
 			self.xScale, self.yScale = 1, 1
@@ -97,6 +128,8 @@ function M.newStick( startAxis, innerRadius, outerRadius )
 			local distance = math.sqrt( (posX*posX) + (posY*posY) )
 
 			if ( distance >= stopRadius ) then
+        --system.vibrate() -- can we use haptic here to give a sense of joystick edge?
+
 				distance = stopRadius
 				self.x = distance * math.cos(angle)
 				self.y = -distance * math.sin(angle)

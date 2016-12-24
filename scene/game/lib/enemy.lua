@@ -21,11 +21,14 @@ function M.new( instance )
 	local x, y = instance.x, instance.y
 
 	-- Load spritesheet
-	local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
-	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
+	local sheetData = { width = 256, height = 256, numFrames = 4, sheetContentWidth = 512, sheetContentHeight = 512 }
+--	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
+	local sheet = graphics.newImageSheet( "scene/game/map/noise_sheet.png", sheetData )
 	local sequenceData = {
-		{ name = "idle", frames = { 21 } },
-		{ name = "walk", frames = { 22, 23, 24, 25 } , time = 500, loopCount = 0 },
+--		{ name = "idle", frames = { 21 } },
+--		{ name = "walk", frames = { 22, 23, 24, 25 } , time = 500, loopCount = 0 },
+		{ name = "idle", frames = { 1 } },
+		{ name = "walk", frames = { 1,2,3,4 } , time = 500, loopCount = 0 },
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x, instance.y = x, y

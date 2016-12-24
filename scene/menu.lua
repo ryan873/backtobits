@@ -29,6 +29,9 @@ function scene:create( event )
 
 	-- stream music
 	bgMusic = audio.loadStream( "scene/game/sfx/loops/backto8bit.mp3" )
+  
+  -- button sfx
+  buttonSFX = audio.loadSound( "scene/game/sfx/lazer.wav" )
 
 	-- Load our UI
 	local uiData = json.decodeFile( system.pathForFile( "scene/menu/ui/title.json", system.ResourceDirectory ) )
@@ -38,6 +41,7 @@ function scene:create( event )
 	-- Find the start button
 	start = ui:findObject( "start" )
 	function start:tap()
+    audio.play(buttonSFX)
 		fx.fadeOut( function()
 				composer.gotoScene( "scene.game", { params = { map = "scene/game/map/level1.json" } } )
 			end )
@@ -47,6 +51,7 @@ function scene:create( event )
 	-- Find the help button
 	local help = ui:findObject( "help" )
 	function help:tap()
+    audio.play(buttonSFX)
 		ui:findLayer( "help" ).isVisible = not ui:findLayer( "help" ).isVisible
 	end
 	help:addEventListener( "tap" )

@@ -29,10 +29,27 @@ function M.new( instance, options )
 		{ name = "walk", frames = { 2, 3, 4, 5 }, time = 333, loopCount = 0 },
 		{ name = "jump", frames = { 6 } },
 		{ name = "ouch", frames = { 7 } },
+		{ name = "swim", frames = { 11, 12, 13, 14 }, time = 666, loopCount = 0 },
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x,instance.y = x, y
 	instance:setSequence( "idle" )
+
+
+--[[
+  -- bubble sheet for swim animation
+	-- Load spritesheet
+	local bSheetData = { width = 128, height = 128, numFrames = 4, sheetContentWidth = 256, sheetContentHeight = 256 }
+	local bSheet = graphics.newImageSheet( "scene/game/map/heroBubbleSheet.png", bSheetData )
+	local bSequenceData = {
+		{ name = "bFloat", frames = { 1,2,3,4 } , time = 500, loopCount = 0 },
+	}
+	local bInstance = display.newSprite( parent, bSheet, bSequenceData )
+	bInstance.x, bInstance.y = x, y
+	bInstance:setSequence( "bFloat" )
+	bInstance:play()
+]]--
+
 
 	-- Add physics
 	physics.addBody( instance, "dynamic", { radius = 58, density = 3, bounce = 0, friction =  1.0 } )
@@ -57,14 +74,14 @@ function M.new( instance, options )
 			elseif "space" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
-			if not ( left == 0 and right == 0 ) and not instance.jumping then
+			if not ( left == 0 and right == 0 ) and not instance.jumping and not instance.swim then
 				instance:setSequence( "walk" )
 				instance:play()
 			end
 		elseif phase == "up" then
 			if "left" == name or "a" == name then left = 0 end
 			if "right" == name or "d" == name then right = 0 end
-			if left == 0 and right == 0 and not instance.jumping then
+			if left == 0 and right == 0 and not instance.jumping and not instance.swim then
 				instance:setSequence("idle")
 			end
 		end
@@ -74,9 +91,16 @@ function M.new( instance, options )
 	function instance:jump()
 		if not self.jumping then
 			audio.play( sounds.jump )
-			self:applyLinearImpulse( 0, -760 ) --550
+			self:applyLinearImpulse( 0, instance.jumpforce ) -- -760   -- -550
 			instance:setSequence( "jump" )
 			self.jumping = true
+      if (instance.swim == true) then
+        instance:setSequence( "swim" )
+        instance:play()
+        local jumpTimer = timer.performWithDelay(500,function()
+              self.jumping = false
+            end)
+      end
 		end
 	end
 

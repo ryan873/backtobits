@@ -13,6 +13,24 @@ function M.new( instance )
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
 	local sounds = scene.sounds
 
+
+	instance.isVisible = false
+	local parent = instance.parent
+	local x, y = instance.x, instance.y
+
+	-- Load spritesheet
+	local sheetData = { width = 256, height = 256, numFrames = 3, sheetContentWidth = 512, sheetContentHeight = 512 }
+	local sheet = graphics.newImageSheet( "scene/game/map/track_sheet.png", sheetData )
+	local sequenceData = {
+		{ name = "idle", frames = { 1 } },
+		{ name = "walk", frames = { 1,2,3 } , time = 500, loopCount = 0 },
+	}
+	instance = display.newSprite( parent, sheet, sequenceData )
+	instance.x, instance.y = x, y
+	instance:setSequence( "walk" )
+	instance:play()
+  
+
 	function instance:collision( event )
 
 		local phase, other = event.phase, event.other

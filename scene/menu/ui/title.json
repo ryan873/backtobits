@@ -5,31 +5,7 @@
          "draworder":"topdown",
          "height":26,
          "name":"background",
-         "objects":[
-                {
-                 "gid":7,
-                 "height":262.666666666667,
-                 "id":11,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":1736,
-                 "x":-256,
-                 "y":920.666666666667
-                }, 
-                {
-                 "gid":6,
-                 "height":832,
-                 "id":34,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":1216,
-                 "x":122,
-                 "y":810
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -41,103 +17,7 @@
          "draworder":"topdown",
          "height":26,
          "name":"clouds",
-         "objects":[
-                {
-                 "gid":8,
-                 "height":61.3333333333333,
-                 "id":14,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":184,
-                 "x":640,
-                 "y":320
-                }, 
-                {
-                 "gid":8,
-                 "height":61.3333333333333,
-                 "id":17,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":184,
-                 "x":336,
-                 "y":144
-                }, 
-                {
-                 "gid":8,
-                 "height":61.3333333333333,
-                 "id":21,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":192,
-                 "x":1024,
-                 "y":145
-                }, 
-                {
-                 "gid":2147483656,
-                 "height":61.3333333333333,
-                 "id":23,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":184,
-                 "x":44,
-                 "y":136
-                }, 
-                {
-                 "gid":6,
-                 "height":600,
-                 "id":8,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":954,
-                 "x":-226,
-                 "y":768
-                }, 
-                {
-                 "gid":2147483654,
-                 "height":546,
-                 "id":35,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":826,
-                 "x":710,
-                 "y":782
-                }, 
-                {
-                 "gid":2147483656,
-                 "height":103.333333333333,
-                 "id":36,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":284,
-                 "x":926,
-                 "y":307
-                }, 
-                {
-                 "gid":8,
-                 "height":103.333333333333,
-                 "id":37,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":284,
-                 "x":124,
-                 "y":353
-                }],
+         "objects":[],
          "opacity":0.490000009536743,
          "type":"objectgroup",
          "visible":false,
@@ -151,12 +31,12 @@
          "name":"title",
          "objects":[
                 {
-                 "gid":9,
+                 "gid":4,
                  "height":750,
-                 "id":38,
+                 "id":43,
                  "name":"logo",
                  "rotation":0,
-                 "type":"",
+                 "type":"logo",
                  "visible":true,
                  "width":1334,
                  "x":-60,
@@ -175,16 +55,16 @@
          "name":"help",
          "objects":[
                 {
-                 "gid":3,
-                 "height":352,
-                 "id":26,
+                 "gid":11,
+                 "height":750,
+                 "id":44,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":512,
-                 "x":416,
-                 "y":608
+                 "width":1334,
+                 "x":-60,
+                 "y":790
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -207,7 +87,7 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":544,
+                 "x":484,
                  "y":704
                 }, 
                 {
@@ -219,7 +99,7 @@
                  "type":"",
                  "visible":true,
                  "width":192,
-                 "x":576,
+                 "x":516,
                  "y":768
                 }],
          "opacity":1,
@@ -229,7 +109,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":39,
+ "nextobjectid":45,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
@@ -240,8 +120,8 @@
          "margin":0,
          "name":"ui",
          "spacing":0,
-         "tilecount":8,
-         "tileheight":832,
+         "tilecount":4,
+         "tileheight":750,
          "tiles":
             {
              "0":
@@ -252,29 +132,30 @@
                 {
                  "image":"buttonStart.png"
                 },
-             "2":
-                {
-                 "image":"helpBackground.png"
-                },
              "3":
                 {
                  "image":"title.png"
                 },
-             "5":
-                {
-                 "image":"backgroundSet.png"
-                },
              "6":
                 {
                  "image":"block.png"
-                },
-             "7":
+                }
+            },
+         "tilewidth":1334
+        }, 
+        {
+         "columns":0,
+         "firstgid":11,
+         "margin":0,
+         "name":"help",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":750,
+         "tiles":
+            {
+             "0":
                 {
-                 "image":"cloud.png"
-                },
-             "8":
-                {
-                 "image":"backtobits_title.png"
+                 "image":"help.png"
                 }
             },
          "tilewidth":1334

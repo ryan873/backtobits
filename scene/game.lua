@@ -8,6 +8,7 @@ local json = require( "json" )
 local scoring = require( "scene.game.lib.score" )
 local heartBar = require( "scene.game.lib.heartBar" )
 
+
 -- Variables local to scene
 local map, hero, shield, parallax1, parallax2, parallax3
 
@@ -21,7 +22,7 @@ function scene:create( event )
 
 	-- Start physics before loading map
 	physics.start()
-	physics.setGravity( 0, 48 )
+	physics.setGravity( 0, 0 )
 
 	-- Load our map
 	local filename = event.params.map or "scene/game/map/sandbox.json"
@@ -29,20 +30,33 @@ function scene:create( event )
 	map = tiled.new( mapData, "scene/game/map" )
 	--map.xScale, map.yScale = 0.85, 0.85
 
+  local song = mapData.properties.song or "backto8bit"
 
-  local song = map.song or "loops/playstation.mp3"
+  local xGravity = 0 -- wind?
+  local yGravity = mapData.properties.gravity or 48 -- get map gravity if it exists
+  
+  physics.setGravity( xGravity, yGravity )
 
 	-- Sounds
 	local sndDir = "scene/game/sfx/"
 	scene.sounds = {
     
-    levelMusic = audio.loadSound( sndDir .. song ),
+    --[[
+    levelMusic = {
+        audio.loadSound( sndDir .. "loops/venus.mp3" ),
+        audio.loadSound( sndDir .. "loops/ladders.mp3" ),
+        audio.loadSound( sndDir .. "loops/playstation.mp3" ),
+        audio.loadSound( sndDir .. "loops/8bitface.mp3" ),
+        audio.loadSound( sndDir .. "loops/backto8bit.mp3" )
+      },
+    ]]--
+    
+    levelMusic = audio.loadSound( sndDir .. "loops/" .. song .. ".mp3"),
     
 		thud = audio.loadSound( sndDir .. "thud.wav" ),
 		sword = audio.loadSound( sndDir .. "sword.wav" ),
 		squish = audio.loadSound( sndDir .. "squish.wav" ),
 		slime = audio.loadSound( sndDir .. "slime.wav" ),
-		wind = audio.loadSound( sndDir .. "loops/spacewind.wav" ),
 		door = audio.loadSound( sndDir .. "door.wav" ),
 		hurt = {
 			audio.loadSound( sndDir .. "hurt1.wav" ),
@@ -57,15 +71,19 @@ function scene:create( event )
 		boxbump = audio.loadSound( sndDir .. "boxbump.wav" )
 	}
 
-
 	-- Find our hero!
 	map.extensions = "scene.game.lib."
 	map:extend( "hero" )
 	hero = map:findObject( "hero" )
 	hero.filename = filename
+  hero.jumpforce = mapData.properties.jumpforce or -760
+  hero.swim = mapData.properties.swim or false
+
+
+
 
 	-- Find our enemies and other items
-	map:extend( "pbr", "blob", "enemy", "exit", "coin", "spikes", "block" )
+	map:extend( "pbr", "blob", "enemy", "exit", "coin", "spikes", "block", "droplet", "bubble" )
 
 	-- Find the parallax layer
 	parallax1 = map:findLayer( "parallax1" )
@@ -135,10 +153,9 @@ function scene:show( event )
 		fx.fadeIn()	-- Fade up from black
 		Runtime:addEventListener( "enterFrame", enterFrame )
 	elseif ( phase == "did" ) then
-		-- Start playing wind sound
 		-- For more details on options to play a pre-loaded sound, see the Audio Usage/Functions guide:
 		-- https://docs.coronalabs.com/guide/media/audioSystem/index.html
-		audio.play( self.sounds.levelMusic, { loops = -1, fadein = 750, channel = 15 } )
+		audio.play( self.sounds.levelMusic, { loops = -1, fadein = 0, channel = 15 } )
 	end
 end
 

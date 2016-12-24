@@ -17,6 +17,7 @@ settings = {
 		usesPermissions =
 		{
 			"android.permission.INTERNET",
+--      "android.permission.VIBRATE"
 		},
 	},
     
@@ -64,7 +65,7 @@ settings = {
 
 	plugins =
 	{
-
+    -- ['plugin.vibrator'] = {publisherId = 'com.spiralcodestudio'}
 	},
 
 	--  Files to be excluded are specified per-platform (iOS, Android, or all) using simple pattern
