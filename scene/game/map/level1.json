@@ -28899,12 +28899,20 @@
                  "height":256,
                  "id":3671,
                  "name":"",
+                 "properties":
+                    {
+                     "track":1
+                    },
+                 "propertytypes":
+                    {
+                     "track":"int"
+                    },
                  "rotation":0,
                  "type":"coin",
                  "visible":true,
                  "width":256,
-                 "x":10816,
-                 "y":2208
+                 "x":1792,
+                 "y":2656
                 }, 
                 {
                  "gid":69,
@@ -28949,26 +28957,6 @@
                  "width":133,
                  "x":11872,
                  "y":2816
-                }, 
-                {
-                 "gid":22,
-                 "height":192,
-                 "id":3847,
-                 "name":"hero",
-                 "properties":
-                    {
-                     "song":"ladders"
-                    },
-                 "propertytypes":
-                    {
-                     "song":"string"
-                    },
-                 "rotation":0,
-                 "type":"hero",
-                 "visible":true,
-                 "width":128,
-                 "x":1088,
-                 "y":2752
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -29074,11 +29062,13 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "song":"ladders"
+     "song":"ladders",
+     "track":"1"
     },
  "propertytypes":
     {
-     "song":"string"
+     "song":"string",
+     "track":"string"
     },
  "renderorder":"right-down",
  "tileheight":32,

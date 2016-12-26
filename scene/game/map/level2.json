@@ -2421,28 +2421,6 @@
                 {
                  "gid":33,
                  "height":96,
-                 "id":3874,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "friction":"1.0"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":256,
-                 "x":9632,
-                 "y":2624
-                }, 
-                {
-                 "gid":33,
-                 "height":96,
                  "id":3875,
                  "name":"",
                  "properties":
@@ -2483,28 +2461,6 @@
                  "width":256,
                  "x":9120,
                  "y":2816
-                }, 
-                {
-                 "gid":33,
-                 "height":96,
-                 "id":3878,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "friction":"1.0"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":256,
-                 "x":9120,
-                 "y":2752
                 }, 
                 {
                  "gid":33,
@@ -3121,28 +3077,6 @@
                  "width":256,
                  "x":9120,
                  "y":2240
-                }, 
-                {
-                 "gid":33,
-                 "height":96,
-                 "id":3926,
-                 "name":"",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "friction":"1.0"
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "friction":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":256,
-                 "x":9120,
-                 "y":2176
                 }, 
                 {
                  "gid":33,
@@ -5769,6 +5703,14 @@
                  "height":256,
                  "id":3671,
                  "name":"",
+                 "properties":
+                    {
+                     "track":2
+                    },
+                 "propertytypes":
+                    {
+                     "track":"int"
+                    },
                  "rotation":0,
                  "type":"coin",
                  "visible":true,
@@ -6008,11 +5950,13 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "song":"venus"
+     "song":"venus",
+     "track":2
     },
  "propertytypes":
     {
-     "song":"string"
+     "song":"string",
+     "track":"int"
     },
  "renderorder":"right-down",
  "tileheight":32,

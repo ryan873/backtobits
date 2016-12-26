@@ -6,6 +6,7 @@ local tiled = require( "com.ponywolf.ponytiled" )
 local physics = require( "physics" )
 local json = require( "json" )
 local scoring = require( "scene.game.lib.score" )
+local tracks = require( "scene.game.lib.tracks" )
 local heartBar = require( "scene.game.lib.heartBar" )
 
 
@@ -99,6 +100,11 @@ function scene:create( event )
 	local score = scene.score
 	score.x = display.contentWidth - score.contentWidth / 2 - 32 - gem.width
 	score.y = display.screenOriginY + score.contentHeight / 2 + 32
+
+  scene.tracks = tracks.new( {} )
+  local tracks = scene.tracks
+  tracks.x = display.contentWidth/2 - tracks.width/2
+  tracks.y = score.y - 16
 
 	-- Add our hearts module
 	shield = heartBar.new({spacing=32})

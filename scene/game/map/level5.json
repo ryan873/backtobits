@@ -271,6 +271,14 @@
                  "height":256,
                  "id":4243,
                  "name":"",
+                 "properties":
+                    {
+                     "track":5
+                    },
+                 "propertytypes":
+                    {
+                     "track":"int"
+                    },
                  "rotation":0,
                  "type":"coin",
                  "visible":true,
@@ -450,11 +458,13 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "song":"backto8bit"
+     "song":"backto8bit",
+     "track":5
     },
  "propertytypes":
     {
-     "song":"string"
+     "song":"string",
+     "track":"int"
     },
  "renderorder":"right-down",
  "tileheight":32,

@@ -2063,6 +2063,14 @@
                  "height":256,
                  "id":4243,
                  "name":"",
+                 "properties":
+                    {
+                     "track":3
+                    },
+                 "propertytypes":
+                    {
+                     "track":"int"
+                    },
                  "rotation":0,
                  "type":"coin",
                  "visible":true,
@@ -5536,14 +5544,16 @@
      "gravity":16,
      "jumpforce":-760,
      "song":"playstation",
-     "swim":true
+     "swim":true,
+     "track":3
     },
  "propertytypes":
     {
      "gravity":"float",
      "jumpforce":"float",
      "song":"string",
-     "swim":"bool"
+     "swim":"bool",
+     "track":"int"
     },
  "renderorder":"right-down",
  "tileheight":32,

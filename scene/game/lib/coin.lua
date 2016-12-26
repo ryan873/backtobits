@@ -12,7 +12,7 @@ function M.new( instance )
 	-- Get scene and sounds
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
 	local sounds = scene.sounds
-
+  local track = instance.track
 
 	instance.isVisible = false
 	local parent = instance.parent
@@ -37,6 +37,8 @@ function M.new( instance )
 		if phase == "began" and other.type == "hero" then
 			audio.play( sounds.lazer )
 			scene.score:add( 100 )
+      local tracks = scene.tracks
+      tracks:activate(track)
 			display.remove( self )
 		end
 	end
