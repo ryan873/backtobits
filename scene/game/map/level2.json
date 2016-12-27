@@ -5629,6 +5629,78 @@
                  "width":256,
                  "x":9856,
                  "y":2528
+                }, 
+                {
+                 "gid":33,
+                 "height":96,
+                 "id":4222,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":true,
+                     "friction":"1.0"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":3488,
+                 "y":2752
+                }, 
+                {
+                 "gid":33,
+                 "height":96,
+                 "id":4223,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":true,
+                     "friction":"1.0"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":3488,
+                 "y":2624
+                }, 
+                {
+                 "gid":33,
+                 "height":96,
+                 "id":4224,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":true,
+                     "friction":"1.0"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":3488,
+                 "y":2496
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5946,7 +6018,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":4222,
+ "nextobjectid":4225,
  "orientation":"orthogonal",
  "properties":
     {
