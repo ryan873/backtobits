@@ -59,11 +59,12 @@ function scene:create( event )
 	-- Transtion in logo
 	transition.from( ui:findObject( "logo" ), { xScale = 2.5, yScale = 2.5, time = 333, transition = easing.outQuad } )
 
+--[[
 	-- Add streaks
 	local streaks = fx.newStreak()
 	streaks.x, streaks.y = ui:findObject( "logo" ):localToContent( -10, 0 )
 	ui:findLayer( "clouds" ):insert( streaks )
-
+]]--
 	sceneGroup:insert( ui )
 
 	-- escape key

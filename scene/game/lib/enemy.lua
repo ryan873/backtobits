@@ -14,21 +14,23 @@ function M.new( instance )
 	-- Get scene and sounds
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
 	local sounds = scene.sounds
-
+ 
+  local sprite = instance.sprite or 21 -- starting frame of sprite artwork
+  
 	-- Store map placement and hide placeholder
 	instance.isVisible = false
 	local parent = instance.parent
 	local x, y = instance.x, instance.y
 
 	-- Load spritesheet
-	local sheetData = { width = 256, height = 256, numFrames = 4, sheetContentWidth = 512, sheetContentHeight = 512 }
---	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
-	local sheet = graphics.newImageSheet( "scene/game/map/noise_sheet.png", sheetData )
+	local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
+	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
+--	local sheet = graphics.newImageSheet( "scene/game/map/noise_sheet.png", sheetData )
 	local sequenceData = {
---		{ name = "idle", frames = { 21 } },
---		{ name = "walk", frames = { 22, 23, 24, 25 } , time = 500, loopCount = 0 },
-		{ name = "idle", frames = { 1 } },
-		{ name = "walk", frames = { 1,2,3,4 } , time = 500, loopCount = 0 },
+		{ name = "idle", frames = { sprite } },
+		{ name = "walk", frames = { sprite+1, sprite+2, sprite+3, sprite+4} , time = 500, loopCount = 0 },
+--		{ name = "idle", frames = { 1 } },
+--		{ name = "walk", frames = { 1,2,3,4 } , time = 500, loopCount = 0 },
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x, instance.y = x, y
