@@ -6639,6 +6639,7 @@
     {
      "gravity":16,
      "jumpforce":-760,
+     "mapScale":0.75,
      "song":"playstation",
      "swim":true,
      "track":3
@@ -6647,6 +6648,7 @@
     {
      "gravity":"float",
      "jumpforce":"float",
+     "mapScale":"float",
      "song":"string",
      "swim":"bool",
      "track":"int"

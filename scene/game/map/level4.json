@@ -60817,13 +60817,11 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "song":"8bitface",
-     "track":4
+     "song":"8bitface"
     },
  "propertytypes":
     {
-     "song":"string",
-     "track":"int"
+     "song":"string"
     },
  "renderorder":"right-down",
  "tileheight":32,

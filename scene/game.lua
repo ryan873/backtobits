@@ -30,6 +30,8 @@ function scene:create( event )
 	local mapData = json.decodeFile( system.pathForFile( filename, system.ResourceDirectory ) )
 	map = tiled.new( mapData, "scene/game/map" )
 	--map.xScale, map.yScale = 0.85, 0.85
+  local mapScale = mapData.properties.mapScale or 1.0
+  map.xScale, map.yScale = mapScale, mapScale
 
   local song = mapData.properties.song or "backto8bit"
 
@@ -149,6 +151,19 @@ local function enterFrame( event )
 			parallax1.x, parallax1.y = hero.x - parallax1.width/2 + map.x * .05, parallax1.y -- + map.y / 8 -- Affects x more than y
 		end
 	end
+  
+  -- are we drunk?
+  --[[
+  local newScale = math.abs(math.sin(elapsed*0.001))
+  
+  local newXScale = 0.5 + (newScale * 0.5)
+  local newYScale = 1.0 - (newScale * 0.5)
+  
+  map.xScale, map.yScale = newXScale, newYScale
+  ]]--
+  
+
+  
 end
 
 -- This function is called when scene comes fully on screen

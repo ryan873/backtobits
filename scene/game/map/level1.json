@@ -28313,11 +28313,13 @@
                  "name":"",
                  "properties":
                     {
-                     "bodyType":"static"
+                     "bodyType":"static",
+                     "friction":1
                     },
                  "propertytypes":
                     {
-                     "bodyType":"string"
+                     "bodyType":"string",
+                     "friction":"float"
                     },
                  "rotation":0,
                  "type":"",
