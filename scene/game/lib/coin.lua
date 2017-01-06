@@ -32,7 +32,6 @@ function M.new( instance )
   
 
 	function instance:collision( event )
-
 		local phase, other = event.phase, event.other
 		if phase == "began" and other.type == "hero" then
 			audio.play( sounds.lazer )

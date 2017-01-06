@@ -16,7 +16,8 @@ function M.new( instance )
 	local sounds = scene.sounds
  
   local sprite = instance.sprite or 21 -- starting frame of sprite artwork
-  
+  local roamTime = instance.roamTime or 300
+
 	-- Store map placement and hide placeholder
 	instance.isVisible = false
 	local parent = instance.parent
@@ -25,12 +26,18 @@ function M.new( instance )
 	-- Load spritesheet
 	local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
 	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
---	local sheet = graphics.newImageSheet( "scene/game/map/noise_sheet.png", sheetData )
+  local walkFrames = {}
+  local animTime = 500
+  if (roamTime > 0) then
+    walkFrames = { sprite+1, sprite+2, sprite+3, sprite+4}
+  else
+    animTime = 2000
+    walkFrames = { sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite, sprite+1, sprite+2, sprite+3, sprite+4}
+  end
+  
 	local sequenceData = {
 		{ name = "idle", frames = { sprite } },
-		{ name = "walk", frames = { sprite+1, sprite+2, sprite+3, sprite+4} , time = 500, loopCount = 0 },
---		{ name = "idle", frames = { 1 } },
---		{ name = "walk", frames = { 1,2,3,4 } , time = 500, loopCount = 0 },
+		{ name = "walk", frames = walkFrames , time = animTime, loopCount = 0 }
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x, instance.y = x, y
@@ -45,10 +52,10 @@ function M.new( instance )
 	instance.isDead = false
 
 	function instance:die()
-		audio.play( sounds.sword )
-		self.isFixedRotation = false
+		audio.play( sounds.kill )
+		self.isFixedRotation = true
 		self.isSensor = true
-		self:applyLinearImpulse( 0, -200 )
+		self:applyLinearImpulse( math.random(0,320)-160, -760 ) -- (0, -200)
 		self.isDead = true
 	end
 
@@ -57,15 +64,17 @@ function M.new( instance )
 		local y1, y2 = self.y + 50, other.y - other.height/2
 		-- Also skip bumping into floating platforms
 		if event.contact and ( y1 > y2 ) then
-		if other.floating then
-			event.contact.isEnabled = false
-		else
-			event.contact.friction = 0.1
-		end
+      if other.floating then
+        event.contact.isEnabled = false
+      else
+        event.contact.friction = 0.1 --1.0
+      end
 		end
 	end
 
 	local max, direction, flip, timeout = 250, 5000, 0.133, 0
+  print ('roamtime is ' .. roamTime)
+  local roam = 0
 	direction = direction * ( ( instance.xScale < 0 ) and 1 or -1 )
 	flip = flip * ( ( instance.xScale < 0 ) and 1 or -1 )
 
@@ -74,19 +83,32 @@ function M.new( instance )
 		-- Do this every frame
 		local vx, vy = instance:getLinearVelocity()
 		local dx = direction
-		if instance.jumping then dx = dx / 4 end
-		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
-			instance:applyForce( dx or 0, 0, instance.x, instance.y )
-		end
-		
+		if instance.jumping then dx = dx / 5 end
+    if roamTime >= 0 then      
+      if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
+        instance:applyForce( dx or 0, 0, instance.x, instance.y )
+      end
 		-- Bumped
-		if math.abs( vx ) < 1 then
-			timeout = timeout + 1
-			if timeout > 30 then
-				timeout = 0
-				direction, flip = -direction, -flip
-			end
-		end
+      if math.abs( vx ) < 1 then
+        timeout = timeout + 1
+        if timeout > 4 then
+          timeout = 0
+          direction, flip = -direction, -flip
+        end
+      end
+    end
+    
+		
+
+    if (not instance.isDead and roamTime >= 0) then
+      roam = roam + 1
+      if (roam > roamTime) then
+        roam = 0
+        direction, flip = -direction, -flip
+      end      
+    end
+    
+    
 
 		-- Turn around
 		instance.xScale = math.min( 1, math.max( instance.xScale + flip, -1 ) )

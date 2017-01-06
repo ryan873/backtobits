@@ -1,6 +1,8 @@
 
 -- Heart bar module
 
+local fx = require( "com.ponywolf.ponyfx" )
+
 -- Define module
 local M = {}
 
@@ -23,6 +25,9 @@ function M.new( options )
 		group:insert( hearts[i] )
 	end
 	group.count = max
+  if not hearts[group.count].breathing then
+    fx.breath(hearts[group.count], 0.1, 500)
+  end
 
 	function group:damage( amount )
 		group.count = math.min( max, math.max( 0, group.count - ( amount or 1 ) ) )
@@ -30,10 +35,15 @@ function M.new( options )
 			if i <= group.count then
 				hearts[i].alpha = 1
 			else
-				hearts[i].alpha = 0.2
+				hearts[i].alpha = 0
 			end
 		end
-		return group.count
+    if group.count > 0 then
+      if not hearts[group.count].breathing then
+        fx.breath(hearts[group.count], 0.1, 500)
+      end
+    end
+ 	return group.count
 	end
 
 	function group:heal( amount )

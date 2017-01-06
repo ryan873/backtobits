@@ -57,7 +57,8 @@ function scene:create( event )
     levelMusic = audio.loadSound( sndDir .. "loops/" .. song .. ".mp3"),
     
 		thud = audio.loadSound( sndDir .. "thud.wav" ),
-		sword = audio.loadSound( sndDir .. "sword.wav" ),
+		kill = audio.loadSound( sndDir .. "kill.wav" ),
+    died = audio.loadSound( sndDir .. "died.wav" ),
 		squish = audio.loadSound( sndDir .. "squish.wav" ),
 		slime = audio.loadSound( sndDir .. "slime.wav" ),
 		door = audio.loadSound( sndDir .. "door.wav" ),
@@ -109,7 +110,7 @@ function scene:create( event )
   tracks.y = score.y - 16
 
 	-- Add our hearts module
-	shield = heartBar.new({spacing=32})
+	shield = heartBar.new({max=5,spacing=32})
 	shield.x = 48
 	shield.y = display.screenOriginY + shield.contentHeight / 2 + 16
 	hero.shield = shield

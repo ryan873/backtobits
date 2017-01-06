@@ -18,6 +18,7 @@ function M.new( instance, options )
 
 	-- Store map placement and hide placeholder
 	instance.isVisible = false
+  local invincible = false
 	local parent = instance.parent
 	local x, y = instance.x, instance.y
 
@@ -28,27 +29,13 @@ function M.new( instance, options )
 		{ name = "idle", frames = { 1 } },
 		{ name = "walk", frames = { 2, 3, 4, 5 }, time = 333, loopCount = 0 },
 		{ name = "jump", frames = { 6 } },
-		{ name = "ouch", frames = { 7 } },
+		{ name = "ouch", frames = { 8, 8, 8, 8, 8 } },
 		{ name = "swim", frames = { 11, 12, 13, 14 }, time = 666, loopCount = 0 },
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x,instance.y = x, y
 	instance:setSequence( "idle" )
 
-
---[[
-  -- bubble sheet for swim animation
-	-- Load spritesheet
-	local bSheetData = { width = 128, height = 128, numFrames = 4, sheetContentWidth = 256, sheetContentHeight = 256 }
-	local bSheet = graphics.newImageSheet( "scene/game/map/heroBubbleSheet.png", bSheetData )
-	local bSequenceData = {
-		{ name = "bFloat", frames = { 1,2,3,4 } , time = 500, loopCount = 0 },
-	}
-	local bInstance = display.newSprite( parent, bSheet, bSequenceData )
-	bInstance.x, bInstance.y = x, y
-	bInstance:setSequence( "bFloat" )
-	bInstance:play()
-]]--
 
 
 	-- Add physics
@@ -104,21 +91,40 @@ function M.new( instance, options )
 		end
 	end
 
+  function instance:heal()
+    print('am I healing?')
+    self.shield:heal()
+  end
+  
 	function instance:hurt()
-		fx.flash( self )
+		fx.flash( self, 30 )
 		audio.play( sounds.hurt[math.random(2)] )
+		instance:setSequence( "ouch" )
+		self:applyLinearImpulse( -1600, 1600 )
+    self.invincible = true
+    print("i'm invincible!")
+    timer.performWithDelay(500,function()
+        print('no longer invincible')
+        self.invincible = false
+      end)
 		if self.shield:damage() <= 0 then
 			-- We died
 			fx.fadeOut( function()
-				composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
-			end, 1500, 1000 )
+				composer.gotoScene( "scene.death", { params = { map = self.filename } } )
+			end, 1500, 2000 )
 			instance.isDead = true
 			instance.isSensor = true
-			self:applyLinearImpulse( 0, -500 )
+--			self:applyLinearImpulse( 0, -500 )
 			-- Death animation
 			instance:setSequence( "ouch" )
 			self.xScale = 1
-			transition.to( self, { xScale = -1, time = 750, transition = easing.continuousLoop, iterations = -1 } )
+      self:toFront()
+      physics.pause()
+      audio.play(sounds.died)
+			transition.to( self, { xScale = 2.5, yScale = 2.5, time = 125, transition = easing.inQuad, onComplete = function()
+            transition.to (self, {y = self.y+1500, time = 3000, delay=500, transition = easing.inQuint})
+          end
+          } )
 			-- Remove all listeners
 			self:finalize()
 		end
@@ -134,9 +140,12 @@ function M.new( instance, options )
 				if y1 < y2 then
 					-- Hopped on top of an enemy
 					other:die()
+--          self:applyLinearImpulse(0,-800)
 				elseif not other.isDead then
 					-- They attacked us
-					self:hurt()
+          if not self.invincible then
+            self:hurt()
+          end
 				end
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping

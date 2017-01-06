@@ -17,6 +17,7 @@ function M.new( instance )
 
 		local phase, other = event.phase, event.other
 		if phase == "began" and other.type == "hero" then
+      other:heal()
 			audio.play( sounds.pbr )
 			scene.score:add( 1 )
 			display.remove( self )

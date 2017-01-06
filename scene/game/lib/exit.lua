@@ -17,22 +17,23 @@ function M.new( instance )
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
 	local sounds = scene.sounds
   
-  --[[
-  
-  local parent = instance.parent
+  local map = instance.map
+	instance.isVisible = false
+	local parent = instance.parent
+	local x, y = instance.x, instance.y
 
   	-- Load spritesheet
-	local sheetData = { width = 256, height = 256, numFrames = 4, sheetContentWidth = 1024, sheetContentHeight = 1024 }
+	local sheetData = { width = 256, height = 256, numFrames = 4, sheetContentWidth = 512, sheetContentHeight = 512 }
 	local sheet = graphics.newImageSheet( "scene/game/map/noise_sheet.png", sheetData )
 	local sequenceData = {
-		{ name = "noise", frames = { 1,2,3,4 } }
+		{ name = "noise", frames = { 1,2,3,4 }, time = 500, loopCount = 0 }
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
-	instance.x,instance.y = 96, 0
+	instance.x,instance.y = x, y
 	instance:setSequence( "noise" )
+  instance.map = map
   instance:play()
 
-  ]]--
   
 	if not instance.bodyType then
 		physics.addBody( instance, "static", { isSensor = true } )
