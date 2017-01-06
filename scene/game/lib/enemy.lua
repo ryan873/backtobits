@@ -53,10 +53,15 @@ function M.new( instance )
 
 	function instance:die()
 		audio.play( sounds.kill )
-		self.isFixedRotation = true
+		self.isFixedRotation = false
 		self.isSensor = true
-		self:applyLinearImpulse( math.random(0,320)-160, -760 ) -- (0, -200)
-		self.isDead = true
+    transition.to(self, {anchorY = 0, yScale = 0.25, time=25, onComplete = function()
+      transition.to(self, {xScale = 0.25, time=25})
+      self:applyLinearImpulse( math.random(0,32)-16, -760 ) -- (0, -200)
+      self:applyAngularImpulse( 100 )
+      self.isDead = true
+    end
+    })
 	end
 
 	function instance:preCollision( event )

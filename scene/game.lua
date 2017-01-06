@@ -93,6 +93,7 @@ function scene:create( event )
 	parallax1 = map:findLayer( "parallax1" )
 	parallax2 = map:findLayer( "parallax2" )
 	parallax3 = map:findLayer( "parallax3" )
+	parallax4 = map:findLayer( "parallax4" )
 
 	-- Add our scoring module
 	local gem = display.newImageRect( sceneGroup, "scene/game/img/gem.png", 64, 64 )
@@ -142,8 +143,11 @@ local function enterFrame( event )
 		x, y = display.contentCenterX - x, display.contentCenterY - y
 		map.x, map.y = map.x + x, map.y + y
 		-- Easy parallax
+		if parallax4 then -- totally static parallax
+			parallax4.x, parallax4.y = hero.x - parallax4.width/2, map.y / 8 + parallax4.height/4 -- Affects x more than y
+		end
 		if parallax3 then -- totally static parallax
-			parallax3.x, parallax3.y = hero.x - parallax3.width/2, map.y / 8 + parallax2.height/4 -- Affects x more than y
+			parallax3.x, parallax3.y = hero.x - parallax3.width/2, map.y / 8 + parallax3.height/4 -- Affects x more than y
 		end
 		if parallax2 then -- more static parallax
 			parallax2.x, parallax2.y = hero.x - parallax2.width/2 + map.x * .01 - 256, map.y / 8 + parallax2.height/7 -- Affects x more than y

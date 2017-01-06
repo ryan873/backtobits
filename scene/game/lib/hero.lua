@@ -102,6 +102,7 @@ function M.new( instance, options )
 		instance:setSequence( "ouch" )
 		self:applyLinearImpulse( -1600, 1600 )
     self.invincible = true
+    system.vibrate()
     print("i'm invincible!")
     timer.performWithDelay(500,function()
         print('no longer invincible')
