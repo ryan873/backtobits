@@ -11,7 +11,7 @@ local heartBar = require( "scene.game.lib.heartBar" )
 
 
 -- Variables local to scene
-local map, hero, shield, parallax1, parallax2, parallax3
+local map, hero, shield, parallax1, parallax2, parallax3, parallax4
 
 -- Create a new Composer scene
 local scene = composer.newScene()
@@ -82,10 +82,9 @@ function scene:create( event )
 	hero.filename = filename
   hero.jumpforce = mapData.properties.jumpforce or -760
   hero.swim = mapData.properties.swim or false
+  hero.ice = mapData.properties.ice or false
 
-
-
-
+  
 	-- Find our enemies and other items
 	map:extend( "pbr", "blob", "enemy", "exit", "coin", "spikes", "block", "droplet", "bubble" )
 

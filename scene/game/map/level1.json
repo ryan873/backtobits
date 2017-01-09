@@ -26837,6 +26837,26 @@
                  "width":512,
                  "x":11680,
                  "y":2688
+                }, 
+                {
+                 "gid":74,
+                 "height":256,
+                 "id":4143,
+                 "name":"",
+                 "properties":
+                    {
+                     "map":"scene\/game\/map\/level2intro.json"
+                    },
+                 "propertytypes":
+                    {
+                     "map":"string"
+                    },
+                 "rotation":0,
+                 "type":"exit",
+                 "visible":true,
+                 "width":256,
+                 "x":11776,
+                 "y":2367
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -28599,26 +28619,6 @@
                  "width":133,
                  "x":10528,
                  "y":2272
-                }, 
-                {
-                 "gid":74,
-                 "height":256,
-                 "id":4143,
-                 "name":"",
-                 "properties":
-                    {
-                     "map":"scene\/game\/map\/level2.json"
-                    },
-                 "propertytypes":
-                    {
-                     "map":"string"
-                    },
-                 "rotation":0,
-                 "type":"exit",
-                 "visible":true,
-                 "width":256,
-                 "x":11776,
-                 "y":2367
                 }],
          "opacity":1,
          "type":"objectgroup",

@@ -17,6 +17,7 @@ function M.new( instance )
  
   local sprite = instance.sprite or 21 -- starting frame of sprite artwork
   local roamTime = instance.roamTime or 300
+  local fish = instance.fish or false -- am I a fish?
 
 	-- Store map placement and hide placeholder
 	instance.isVisible = false
@@ -45,7 +46,14 @@ function M.new( instance )
 	instance:play()
 
 	-- Add physics
+  local enemyGravityScale = 1.0
+  if fish == true then
+    print ("I am a fish!")
+    enemyGravityScale = 0
+  end
+  
 	physics.addBody( instance, "dynamic", { radius = 54, density = 3, bounce = 0, friction =  1.0 } )
+  instance.gravityScale = enemyGravityScale
 	instance.isFixedRotation = true
 	instance.anchorY = 0.77
 	instance.angularDamping = 3
@@ -53,8 +61,12 @@ function M.new( instance )
 
 	function instance:die()
 		audio.play( sounds.kill )
-		self.isFixedRotation = false
+		self.isFixedRotation = true
 		self.isSensor = true
+    
+    self:applyLinearImpulse( math.random(0,32)-16, -540 ) -- (0, -200)
+    self.isDead = true
+--[[  
     transition.to(self, {anchorY = 0, yScale = 0.25, time=25, onComplete = function()
       transition.to(self, {xScale = 0.25, time=25})
       self:applyLinearImpulse( math.random(0,32)-16, -760 ) -- (0, -200)
@@ -62,6 +74,7 @@ function M.new( instance )
       self.isDead = true
     end
     })
+  ]]--
 	end
 
 	function instance:preCollision( event )
@@ -78,7 +91,7 @@ function M.new( instance )
 	end
 
 	local max, direction, flip, timeout = 250, 5000, 0.133, 0
-  print ('roamtime is ' .. roamTime)
+--  print ('roamtime is ' .. roamTime)
   local roam = 0
 	direction = direction * ( ( instance.xScale < 0 ) and 1 or -1 )
 	flip = flip * ( ( instance.xScale < 0 ) and 1 or -1 )

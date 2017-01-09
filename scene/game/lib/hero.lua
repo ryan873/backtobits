@@ -31,21 +31,39 @@ function M.new( instance, options )
 		{ name = "jump", frames = { 6 } },
 		{ name = "ouch", frames = { 8, 8, 8, 8, 8 } },
 		{ name = "swim", frames = { 11, 12, 13, 14 }, time = 666, loopCount = 0 },
+		{ name = "slide", frames = { 17, 18 }, time = 666, loopCount = 0 },
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x,instance.y = x, y
-	instance:setSequence( "idle" )
+  
+  local heroFriction = 1.0
+  local heroDensity = 3.0
+  local heroBounce = 0.0
+  
+  if not instance.ice then
+    instance:setSequence( "idle" )
+  else
+    heroFriction = 0.0
+    heroBounce = 0.76
+    instance:setSequence( "slide" )
+    instance:play()
+  end
+
 
 
 
 	-- Add physics
-	physics.addBody( instance, "dynamic", { radius = 58, density = 3, bounce = 0, friction =  1.0 } )
+	physics.addBody( instance, "dynamic", { radius = 58, density = heroDensity, bounce = heroBounce, friction =  heroFriction } )
 	instance.isFixedRotation = true
 	instance.anchorY = 0.77
 
 	-- Keyboard control
 	local max, acceleration, left, right, flip = 375, 7000, 0, 0, 0
 	local lastEvent = {}
+  if (instance.ice == true) then
+    max = max * 5
+    acceleration = acceleration * 5
+  end
 	local function key( event )
 		local phase = event.phase
 		local name = event.keyName
@@ -62,13 +80,19 @@ function M.new( instance, options )
 				instance:jump()
 			end
 			if not ( left == 0 and right == 0 ) and not instance.jumping and not instance.swim then
-				instance:setSequence( "walk" )
-				instance:play()
+        if not instance.ice then
+          instance:setSequence( "walk" )
+          instance:play()
+        else
+          instance:setSequence( "slide" )
+          instance:play()
+        end
+        
 			end
 		elseif phase == "up" then
 			if "left" == name or "a" == name then left = 0 end
 			if "right" == name or "d" == name then right = 0 end
-			if left == 0 and right == 0 and not instance.jumping and not instance.swim then
+			if left == 0 and right == 0 and not instance.jumping and not instance.swim and not instance.ice then
 				instance:setSequence("idle")
 			end
 		end
@@ -92,7 +116,7 @@ function M.new( instance, options )
 	end
 
   function instance:heal()
-    print('am I healing?')
+--    print('am I healing?')
     self.shield:heal()
   end
   
@@ -100,7 +124,12 @@ function M.new( instance, options )
 		fx.flash( self, 30 )
 		audio.play( sounds.hurt[math.random(2)] )
 		instance:setSequence( "ouch" )
-		self:applyLinearImpulse( -1600, 1600 )
+    local hurtImpulseDir = 1
+    if (self.xScale > 0) then
+      hurtImpulseDir = -1
+    end
+    self:setLinearVelocity(0,0)
+		self:applyLinearImpulse( 400*hurtImpulseDir, -300)
     self.invincible = true
     system.vibrate()
     print("i'm invincible!")
@@ -152,10 +181,22 @@ function M.new( instance, options )
 				-- Landed after jumping
 				self.jumping = false
 				if not ( left == 0 and right == 0 ) and not instance.jumping then
-					instance:setSequence( "walk" )
-					instance:play()
+          if not self.ice then
+            self:setSequence( "walk" )
+            self:play()
+          else
+            self:setSequence( "slide" )
+            self:play()
+          end
 				else
-					self:setSequence( "idle" )
+          if not self.ice then
+            self:setSequence( "idle" )
+          else
+            self:setSequence( "slide" )
+            self:play()
+          end
+---					self:setSequence( "idle" )
+          
 				end
 			end
 		end
