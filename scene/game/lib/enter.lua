@@ -30,33 +30,16 @@ function M.new( instance )
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x,instance.y = x, y
+  instance.xScale, instance.yScale = 0.1, 0.1
 	instance:setSequence( "noise" )
   instance.map = map
   instance:play()
-
   
-	if not instance.bodyType then
-		physics.addBody( instance, "static", { isSensor = true } )
-	end
-
-	function instance:collision( event )
-		local phase, other = event.phase, event.other
-		if phase == "began" and other.name == "hero" and not other.isDead then
-			other.isDead = true
-			other.linearDamping = 8
-      audio.play( sounds.exit )
-			transition.to( self, { time = 600, xScale = 3, yScale = 3, transition = easing.outQuad, onComplete = function()
-        transition.to( self, { time = 400, xScale = 1, yScale = 1, transition = easing.inQuad, onComplete = function()
-          fx.fadeOut( function()
-            audio.fadeOut( { time = 1000 } )
-            composer.gotoScene( "scene.refresh", { params = { map = self.map, beat = scene.beat, score = scene.score:get() } } )
-          end )
-        end } )
-			end } )
-		end
-	end
-
-	instance:addEventListener( "collision" )
+  transition.to(instance, { time=555, xScale=2, yScale=2, transition=easing.outQuad, onComplete=function()
+        transition.to(instance, {time=333, xScale=0.01, yScale=0.01, alpha=0, transition=easing.inQuad})
+      end
+      })
+  
 	return instance
 end
 

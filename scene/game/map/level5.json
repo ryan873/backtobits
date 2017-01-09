@@ -517,7 +517,7 @@
                  "name":"",
                  "properties":
                     {
-                     "map":"scene\/game\/map\/level1.json"
+                     "map":"scene\/game\/map\/level6intro.json"
                     },
                  "propertytypes":
                     {
@@ -549,8 +549,72 @@
                  "type":"enemy",
                  "visible":true,
                  "width":256,
-                 "x":2304,
-                 "y":3328
+                 "x":1344,
+                 "y":3360
+                }, 
+                {
+                 "gid":17,
+                 "height":256,
+                 "id":5105,
+                 "name":"",
+                 "rotation":0,
+                 "type":"enter",
+                 "visible":true,
+                 "width":256,
+                 "x":402,
+                 "y":7488
+                }, 
+                {
+                 "gid":11,
+                 "height":128,
+                 "id":5106,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"dynamic",
+                     "bounce":0.5,
+                     "friction":0.8,
+                     "radius":64
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "bounce":"float",
+                     "friction":"float",
+                     "radius":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":2048,
+                 "y":4096
+                }, 
+                {
+                 "gid":11,
+                 "height":128,
+                 "id":5107,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"dynamic",
+                     "bounce":0.5,
+                     "friction":0.8,
+                     "radius":64
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "bounce":"float",
+                     "friction":"float",
+                     "radius":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":1984,
+                 "y":3616
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3850,7 +3914,7 @@
                  "visible":true,
                  "width":128,
                  "x":480,
-                 "y":7424
+                 "y":7432
                 }, 
                 {
                  "gid":3,
@@ -3999,7 +4063,7 @@
                  "name":"",
                  "properties":
                     {
-                     "roamTime":120,
+                     "roamTime":240,
                      "sprite":41
                     },
                  "propertytypes":
@@ -4011,7 +4075,7 @@
                  "type":"enemy",
                  "visible":true,
                  "width":256,
-                 "x":1728,
+                 "x":1632,
                  "y":6176
                 }, 
                 {
@@ -5221,6 +5285,32 @@
                  "width":64,
                  "x":2976,
                  "y":3232
+                }, 
+                {
+                 "gid":11,
+                 "height":128,
+                 "id":5104,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"dynamic",
+                     "bounce":0.5,
+                     "friction":0.8,
+                     "radius":64
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "bounce":"float",
+                     "friction":"float",
+                     "radius":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":3648,
+                 "y":3232
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5341,7 +5431,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":5103,
+ "nextobjectid":5108,
  "orientation":"orthogonal",
  "properties":
     {

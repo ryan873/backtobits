@@ -1,4 +1,4 @@
-{ "backgroundcolor":"#341b8a",
+{ "backgroundcolor":"#ff005f",
  "height":32,
  "layers":[
         {
@@ -361,10 +361,12 @@
                  "name":"",
                  "properties":
                     {
-                     "map":"scene\/game\/map\/level2.json"
+                     "beat":true,
+                     "map":"scene\/game\/map\/level1.json"
                     },
                  "propertytypes":
                     {
+                     "beat":"bool",
                      "map":"string"
                     },
                  "rotation":0,
@@ -534,7 +536,7 @@
                 },
              "4":
                 {
-                 "image":"title_level2intro.png"
+                 "image":"title_level6intro.png"
                 },
              "5":
                 {

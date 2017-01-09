@@ -24,7 +24,7 @@ function M.new( options )
 		hearts[i] = display.newImageRect( "scene/game/map/tracks_score_" .. i .. ".png", w, h )
 		hearts[i].x = (i) * ( (w/2) + spacing )
 		hearts[i].y = 0
-    hearts[i].alpha = 0.125
+    hearts[i].alpha = 0.0625
 		group:insert( hearts[i] )
 	end
 	group.count = max

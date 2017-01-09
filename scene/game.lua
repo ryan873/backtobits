@@ -11,7 +11,7 @@ local heartBar = require( "scene.game.lib.heartBar" )
 
 
 -- Variables local to scene
-local map, hero, shield, parallax1, parallax2, parallax3, parallax4
+local map, hero, title, shield, parallax1, parallax2, parallax3, parallax4
 
 -- Create a new Composer scene
 local scene = composer.newScene()
@@ -27,11 +27,17 @@ function scene:create( event )
 
 	-- Load our map
 	local filename = event.params.map or "scene/game/map/sandbox.json"
+  
+  if not scene.beat then
+    local beat = event.params.beat or false
+    print('beat? ' .. tostring(beat))
+    scene.beat = beat  
+  end
 	local mapData = json.decodeFile( system.pathForFile( filename, system.ResourceDirectory ) )
 	map = tiled.new( mapData, "scene/game/map" )
 	--map.xScale, map.yScale = 0.85, 0.85
   local mapScale = mapData.properties.mapScale or 1.0
-  map.xScale, map.yScale = mapScale, mapScale
+  map.xScale, map.yScale = 1.0, 1.0
 
   local song = mapData.properties.song or "backto8bit"
 
@@ -39,7 +45,12 @@ function scene:create( event )
   local yGravity = mapData.properties.gravity or 48 -- get map gravity if it exists
   
   physics.setGravity( xGravity, yGravity )
-
+  
+  -- pause gravity start so hero can appear
+  physics.pause()
+  timer.performWithDelay(700, function()
+      physics.start()
+    end)
 	-- Sounds
 	local sndDir = "scene/game/sfx/"
 	scene.sounds = {
@@ -57,6 +68,7 @@ function scene:create( event )
     levelMusic = audio.loadSound( sndDir .. "loops/" .. song .. ".mp3"),
     
 		thud = audio.loadSound( sndDir .. "thud.wav" ),
+		exit = audio.loadSound( sndDir .. "exit.wav" ),
 		kill = audio.loadSound( sndDir .. "kill.wav" ),
     died = audio.loadSound( sndDir .. "died.wav" ),
 		squish = audio.loadSound( sndDir .. "squish.wav" ),
@@ -84,9 +96,19 @@ function scene:create( event )
   hero.swim = mapData.properties.swim or false
   hero.ice = mapData.properties.ice or false
 
+  -- bring in map and hero
+  transition.to(map, {xScale=mapScale, yScale=mapScale, delay=500, time=2000, transition=easing.inOutQuad})
+  transition.from(hero, {xScale=0.01, yScale=0.01, alpha=0, time=500, delay=100, transition=easing.inOutQuad})
+
+  -- find title if it exists
+  title = map:findObject( "title" ) or nil
+  if (title) then
+    transition.from( title, { xScale = 2.5, yScale = 2.5, alpha=0, delay=2000, time = 1000, transition = easing.outBounce } )
+  end
+
   
 	-- Find our enemies and other items
-	map:extend( "pbr", "blob", "enemy", "exit", "coin", "spikes", "block", "droplet", "bubble" )
+	map:extend( "pbr", "blob", "enemy", "enter", "exit", "continue", "coin", "spikes", "block", "droplet", "bubble" )
 
 	-- Find the parallax layer
 	parallax1 = map:findLayer( "parallax1" )
@@ -110,7 +132,7 @@ function scene:create( event )
   tracks.y = score.y - 16
 
 	-- Add our hearts module
-	shield = heartBar.new({max=5,spacing=32})
+	shield = heartBar.new({max=3,spacing=32})
 	shield.x = 48
 	shield.y = display.screenOriginY + shield.contentHeight / 2 + 16
 	hero.shield = shield
@@ -170,6 +192,7 @@ local function enterFrame( event )
   
 end
 
+
 -- This function is called when scene comes fully on screen
 function scene:show( event )
 
@@ -189,7 +212,7 @@ function scene:hide( event )
 
 	local phase = event.phase
 	if ( phase == "will" ) then
-		audio.fadeOut( { time = 1000 } )
+--		audio.fadeOut( { time = 1000 } )
 	elseif ( phase == "did" ) then
 		Runtime:removeEventListener( "enterFrame", enterFrame )
 	end
@@ -204,6 +227,7 @@ function scene:destroy( event )
 		self.sounds[s] = nil
 	end
 end
+
 
 scene:addEventListener( "create" )
 scene:addEventListener( "show" )

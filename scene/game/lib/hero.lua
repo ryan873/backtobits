@@ -23,8 +23,14 @@ function M.new( instance, options )
 	local x, y = instance.x, instance.y
 
 	-- Load spritesheet
+  
+  local imageSheet = "scene/game/img/sprites.png"
+  if (scene.beat) then
+    imageSheet = "scene/game/img/sprites_beat.png"
+  end
+  
 	local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
-	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
+	local sheet = graphics.newImageSheet( imageSheet, sheetData )
 	local sequenceData = {
 		{ name = "idle", frames = { 1 } },
 		{ name = "walk", frames = { 2, 3, 4, 5 }, time = 333, loopCount = 0 },
@@ -41,7 +47,8 @@ function M.new( instance, options )
   local heroBounce = 0.0
   
   if not instance.ice then
-    instance:setSequence( "idle" )
+    instance:setSequence( "jump" ) -- start with jump animation because we are falling
+    instance.jumping = true
   else
     heroFriction = 0.0
     heroBounce = 0.76
@@ -132,9 +139,10 @@ function M.new( instance, options )
 		self:applyLinearImpulse( 400*hurtImpulseDir, -300)
     self.invincible = true
     system.vibrate()
-    print("i'm invincible!")
+--    print("i'm invincible!")
     timer.performWithDelay(500,function()
-        print('no longer invincible')
+--      print('no longer invincible')
+--        instance:setSequence( "idle" )
         self.invincible = false
       end)
 		if self.shield:damage() <= 0 then
@@ -161,20 +169,25 @@ function M.new( instance, options )
 	end
 
 	function instance:collision( event )
+    
 		local phase = event.phase
 		local other = event.other
 		local y1, y2 = self.y + 50, other.y - ( other.type == "enemy" and 25 or other.height/2 )
 		local vx, vy = self:getLinearVelocity()
 		if phase == "began" then
-			if not self.isDead and ( other.type == "blob" or other.type == "enemy" ) then
+			if not self.isDead and ( other.type == "blob" or other.type == "enemy" or other.type == "bullet" ) then
 				if y1 < y2 then
 					-- Hopped on top of an enemy
 					other:die()
---          self:applyLinearImpulse(0,-800)
+          self:setLinearVelocity(0, 0)
+          self:applyLinearImpulse(0,-760, self.x, self.y)
 				elseif not other.isDead then
 					-- They attacked us
           if not self.invincible then
             self:hurt()
+          end
+          if other.type == "bullet" then
+            display.remove(other)
           end
 				end
 			elseif self.jumping and vy > 0 and not self.isDead then

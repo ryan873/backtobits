@@ -43,7 +43,7 @@ function scene:create( event )
 	function start:tap()
     audio.play(buttonSFX)
 		fx.fadeOut( function()
-				composer.gotoScene( "scene.game", { params = { map = "scene/game/map/level1.json" } } )
+				composer.gotoScene( "scene.game", { params = { map = "scene/game/map/level1intro.json" } } )
 			end )
 	end
 	fx.breath( start )
