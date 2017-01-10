@@ -23,11 +23,14 @@ function M.new( options )
 		hearts[i].x = (i-1) * ( (w/2) + spacing )
 		hearts[i].y = 0
 		group:insert( hearts[i] )
+    if not hearts[i].breathing then
+      timer.performWithDelay(i*500,
+        function()
+          fx.breath(hearts[i], 0.1, 500)
+        end)
+    end
 	end
 	group.count = max
-  if not hearts[group.count].breathing then
-    fx.breath(hearts[group.count], 0.1, 500)
-  end
 
 	function group:damage( amount )
 		group.count = math.min( max, math.max( 0, group.count - ( amount or 1 ) ) )

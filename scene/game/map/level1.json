@@ -34023,18 +34023,20 @@
                  "name":"",
                  "properties":
                     {
+                     "roamTime":120,
                      "sprite":21
                     },
                  "propertytypes":
                     {
+                     "roamTime":"int",
                      "sprite":"int"
                     },
                  "rotation":0,
                  "type":"enemy",
                  "visible":true,
                  "width":133,
-                 "x":6912,
-                 "y":2592
+                 "x":5600,
+                 "y":2560
                 }, 
                 {
                  "gid":63,
@@ -34063,10 +34065,12 @@
                  "name":"",
                  "properties":
                     {
+                     "roamTime":120,
                      "sprite":26
                     },
                  "propertytypes":
                     {
+                     "roamTime":"int",
                      "sprite":"int"
                     },
                  "rotation":0,

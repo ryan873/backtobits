@@ -18,7 +18,9 @@ function scene:create( event )
 
 	local sceneGroup = self.view  -- Add scene display objects to this group
 
-	local options = { params = event.params }
+--	local options = { params = event.params }
+  
+--  print('scene:create ... did my map cross over? ' .. event.params.map)
 
   -- death sfx
   deathSFX = audio.loadSound("scene/game/sfx/death.wav")
@@ -36,15 +38,13 @@ function scene:create( event )
 	function start:tap()
     audio.play(buttonSFX)
 		fx.fadeOut( function()
-        composer.gotoScene( prevScene, options )
+        composer.gotoScene( prevScene, scene.options )
 --				composer.gotoScene( "scene.game", { params = { map = "scene/game/map/level1.json" } } )
 			end )
 	end
 	fx.breath( start )
 
 
-	-- Transtion in logo
-	transition.from( ui:findObject( "logo" ), { alpha = 0.125, xScale = 0.5, yScale = 0.5, time = 5000, transition = easing.outQuad } )
 
 	sceneGroup:insert( ui )
 
@@ -55,11 +55,16 @@ function scene:show( event )
 
 	local phase = event.phase
 	local options = { params = event.params }
+  scene.options = options
+--  print('scene:show ... did my map cross over? ' .. event.params.map)
+
 	if ( phase == "will" ) then
 		fx.fadeIn()
 		start:addEventListener( "tap" )
 		composer.removeScene( prevScene )
 	elseif ( phase == "did" ) then
+    -- Transtion in logo
+    transition.from( ui:findObject( "logo" ), { alpha = 0.125, xScale = 0.5, yScale = 0.5, time = 5000, transition = easing.outQuad } )
     audio.play(deathSFX)
 --		composer.gotoScene( prevScene, options )
 	end

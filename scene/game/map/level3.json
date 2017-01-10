@@ -4659,13 +4659,11 @@
                  "name":"",
                  "properties":
                     {
-                     "bullet":true,
                      "roamTime":120,
                      "sprite":36
                     },
                  "propertytypes":
                     {
-                     "bullet":"bool",
                      "roamTime":"int",
                      "sprite":"int"
                     },
@@ -4683,13 +4681,11 @@
                  "name":"",
                  "properties":
                     {
-                     "bullet":true,
                      "roamTime":180,
                      "sprite":36
                     },
                  "propertytypes":
                     {
-                     "bullet":"bool",
                      "roamTime":"int",
                      "sprite":"int"
                     },
@@ -4697,8 +4693,8 @@
                  "type":"enemy",
                  "visible":true,
                  "width":256,
-                 "x":3872,
-                 "y":7008
+                 "x":3072,
+                 "y":7040
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -6823,8 +6819,16 @@
                  "height":256,
                  "id":4633,
                  "name":"",
+                 "properties":
+                    {
+                     "sprite":31
+                    },
+                 "propertytypes":
+                    {
+                     "sprite":"int"
+                    },
                  "rotation":0,
-                 "type":"",
+                 "type":"enemy",
                  "visible":true,
                  "width":256,
                  "x":2400,

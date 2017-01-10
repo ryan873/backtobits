@@ -40,9 +40,7 @@ function M.new( instance )
   instance.beat = beat
   instance:play()
   
---  transition.to(instance, {x=-1000, time=0})
---  transition.to(instance, {x=x, time=0, delay=1900})
-  transition.from(instance, {xScale = 0.01, yScale = 0.01, time=760, delay=2000, alpha=0, transition=easing.outBounce})
+  transition.from(instance, {xScale = 0.01, yScale = 0.01, time=760, delay=1700, alpha=0, transition=easing.outBounce})
 
   
 	if not instance.bodyType then

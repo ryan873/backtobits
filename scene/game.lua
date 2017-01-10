@@ -28,9 +28,13 @@ function scene:create( event )
 	-- Load our map
 	local filename = event.params.map or "scene/game/map/sandbox.json"
   
+  print('Loading map: ' .. filename)
+  
+  
+  -- did we beat the game? influences sprites for replay
   if not scene.beat then
     local beat = event.params.beat or false
-    print('beat? ' .. tostring(beat))
+--    print('beat? ' .. tostring(beat))
     scene.beat = beat  
   end
 	local mapData = json.decodeFile( system.pathForFile( filename, system.ResourceDirectory ) )
@@ -103,7 +107,7 @@ function scene:create( event )
   -- find title if it exists
   title = map:findObject( "title" ) or nil
   if (title) then
-    transition.from( title, { xScale = 2.5, yScale = 2.5, alpha=0, delay=2000, time = 1000, transition = easing.outBounce } )
+    transition.from( title, { xScale = 2.5, yScale = 2.5, alpha=0, delay=1500, time = 1000, transition = easing.outBounce } )
   end
 
   
@@ -147,6 +151,7 @@ function scene:create( event )
 
 	-- Insert our game items in the correct back-to-front order
 	sceneGroup:insert( map )
+	sceneGroup:insert( tracks )
 	sceneGroup:insert( score )
 	sceneGroup:insert( gem )
 	sceneGroup:insert( shield )

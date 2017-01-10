@@ -148,6 +148,7 @@ function M.new( instance, options )
 		if self.shield:damage() <= 0 then
 			-- We died
 			fx.fadeOut( function()
+--        print('I died... my map is ' .. self.filename)
 				composer.gotoScene( "scene.death", { params = { map = self.filename } } )
 			end, 1500, 2000 )
 			instance.isDead = true
@@ -178,7 +179,9 @@ function M.new( instance, options )
 			if not self.isDead and ( other.type == "blob" or other.type == "enemy" or other.type == "bullet" ) then
 				if y1 < y2 then
 					-- Hopped on top of an enemy
-					other:die()
+          if (other.type == "enemy") then
+            other:die()
+          end
           self:setLinearVelocity(0, 0)
           self:applyLinearImpulse(0,-760, self.x, self.y)
 				elseif not other.isDead then
