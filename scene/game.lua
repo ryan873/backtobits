@@ -165,7 +165,7 @@ local function enterFrame( event )
 
 	-- Easy way to scroll a map based on a character
 	if hero and hero.x and hero.y and not hero.isDead then
-		local x, y = hero:localToContent( 0, 0 )
+		local x, y = hero:localToContent( 0, -32 )
 		x, y = display.contentCenterX - x, display.contentCenterY - y
 		map.x, map.y = map.x + x, map.y + y
 		-- Easy parallax

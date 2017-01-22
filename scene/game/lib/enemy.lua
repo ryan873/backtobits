@@ -71,11 +71,21 @@ function M.new( instance )
 --    print('I am shooting...')
     local bullet = display.newImageRect("scene/game/map/bullet.png", 32, 32)
     bullet.x, bullet.y = self.x-self.width/2, self.y+self.width/8
-    bullet.xScale = 3.0
+    bullet.xScale = 2.0
     physics.addBody( bullet, "dynamic", {radius=16, density=1,bounce=0.5, friction=0.5})
     bullet.gravityScale = 0
     bullet.isBullet = true
     bullet.type = "bullet"
+    function bullet:collision(event)
+      local other = event.other
+      if not (other.type == "hero") and not (other.type == "pbr") then
+        print('I hit something: ' .. other.type)
+        display.remove(bullet)
+      elseif (other.type == "hero") then
+        print('I hit the hero')
+      end
+    end
+    bullet:addEventListener("collision",bullet)
     bullet:setLinearVelocity(-800, 0)
     instance.parent:insert(bullet)
     timer.performWithDelay(1600, function() display.remove(bullet) end)

@@ -12,7 +12,6 @@ function M.new( instance )
 
 	if not instance then error( "ERROR: Expected display object" ) end
   
-  
 	-- Get current scene and sounds
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
 	local sounds = scene.sounds
