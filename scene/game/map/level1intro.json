@@ -778,6 +778,25 @@
                  "width":64,
                  "x":2257,
                  "y":0
+                }, 
+                {
+                 "height":1024,
+                 "id":78,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static"
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":-3872,
+                 "y":160
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -786,7 +805,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":70,
+ "nextobjectid":83,
  "orientation":"orthogonal",
  "properties":
     {
@@ -807,7 +826,7 @@
          "margin":0,
          "name":"intro",
          "spacing":0,
-         "tilecount":17,
+         "tilecount":18,
          "tileheight":512,
          "tiles":
             {
@@ -846,6 +865,10 @@
              "17":
                 {
                  "image":"title_venus.png"
+                },
+             "18":
+                {
+                 "image":"heart.png"
                 },
              "2":
                 {

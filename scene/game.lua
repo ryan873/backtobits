@@ -112,7 +112,7 @@ function scene:create( event )
 
   
 	-- Find our enemies and other items
-	map:extend( "pbr", "blob", "enemy", "enter", "exit", "continue", "coin", "spikes", "block", "droplet", "bubble" )
+	map:extend( "pbr", "blob", "enemy", "enter", "exit", "continue", "coin", "heart", "spikes", "block", "droplet", "bubble" )
 
 	-- Find the parallax layer
 	parallax1 = map:findLayer( "parallax1" )
@@ -136,22 +136,26 @@ function scene:create( event )
   tracks.y = score.y - 16
 
 	-- Add our hearts module
-	shield = heartBar.new({max=3,spacing=32})
+  local hearts = event.params.hearts or 3
+	shield = heartBar.new({max=hearts,spacing=32})
 	shield.x = 48
-	shield.y = display.screenOriginY + shield.contentHeight / 2 + 16
+	shield.y = 48 --display.screenOriginY + shield.contentHeight / 2 + 16
 	hero.shield = shield
+  scene.shield = shield
 
 	-- Touch the sheilds to go back to the main...
+  --[[
 	function shield:tap(event)
 		fx.fadeOut( function()
 				composer.gotoScene( "scene.menu")
 			end )
 	end
 	shield:addEventListener("tap")
-
+  ]]--
+  
 	-- Insert our game items in the correct back-to-front order
 	sceneGroup:insert( map )
-	sceneGroup:insert( tracks )
+--	sceneGroup:insert( tracks )
 	sceneGroup:insert( score )
 	sceneGroup:insert( gem )
 	sceneGroup:insert( shield )

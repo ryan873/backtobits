@@ -76,10 +76,11 @@ function M.new( instance )
     bullet.gravityScale = 0
     bullet.isBullet = true
     bullet.type = "bullet"
+    
     function bullet:collision(event)
       local other = event.other
       if not (other.type == "hero") and not (other.type == "pbr") then
-        print('I hit something: ' .. other.type)
+--        print('I hit something: ' .. other.type)
         display.remove(bullet)
       elseif (other.type == "hero") then
         print('I hit the hero')

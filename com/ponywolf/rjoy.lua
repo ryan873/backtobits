@@ -80,7 +80,8 @@ function M.newTapZones(leftPercent,rightPercent)
 	function moveRect:touch( event )
     
     local startAxis = 1 -- horizontal only here
-        
+    local threshold = 10
+    
 		local phase = event.phase
     
     local parent = self.parent
@@ -102,10 +103,10 @@ function M.newTapZones(leftPercent,rightPercent)
         
       elseif phase == "moved" then
         
-        if posX < self.originX then
+        if posX < self.originX - threshold then
           self.dir = 'left'
           self.axisX = -1
-        elseif posX > self.originX then
+        elseif posX > self.originX + threshold then
           self.dir = 'right'
           self.axisX = 1
         end
@@ -127,7 +128,7 @@ function M.newTapZones(leftPercent,rightPercent)
     local axisEvent
 		if not ( self.dir == self.lastDir ) then
       dPadManager(self.axisX)
-      print('moving ' .. self.dir .. ': ' .. posX .. '/' .. self.originX .. ' [' .. self.axisX .. ']')
+--      print('moving ' .. self.dir .. ': ' .. posX .. '/' .. self.originX .. ' [' .. self.axisX .. ']')
       axisEvent = { name = "axis", axis = { number = startAxis }, normalizedValue = 0 }
       Runtime:dispatchEvent( axisEvent )
       axisEvent = { name = "axis", axis = { number = startAxis }, normalizedValue = self.axisX }

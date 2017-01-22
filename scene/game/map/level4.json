@@ -16269,6 +16269,102 @@
                  "width":512,
                  "x":26432,
                  "y":7968
+                }, 
+                {
+                 "gid":38,
+                 "height":64,
+                 "id":10838,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":true,
+                     "friction":0.2
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":512,
+                 "x":23648,
+                 "y":8384
+                }, 
+                {
+                 "gid":38,
+                 "height":64,
+                 "id":10841,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":true,
+                     "friction":0.2
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":512,
+                 "x":24928,
+                 "y":8736
+                }, 
+                {
+                 "gid":37,
+                 "height":64,
+                 "id":10842,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":true,
+                     "friction":0.2
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":512,
+                 "x":24256,
+                 "y":8576
+                }, 
+                {
+                 "gid":37,
+                 "height":64,
+                 "id":10843,
+                 "name":"",
+                 "properties":
+                    {
+                     "bodyType":"static",
+                     "floating":true,
+                     "friction":0.2
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"float"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":512,
+                 "x":25632,
+                 "y":8864
                 }],
          "opacity":0.990000009536743,
          "type":"objectgroup",
@@ -63323,6 +63419,18 @@
                  "width":64,
                  "x":5248,
                  "y":13952
+                }, 
+                {
+                 "gid":41,
+                 "height":128,
+                 "id":10844,
+                 "name":"",
+                 "rotation":0,
+                 "type":"heart",
+                 "visible":true,
+                 "width":128,
+                 "x":25824,
+                 "y":8736
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -65601,7 +65709,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":10838,
+ "nextobjectid":10845,
  "orientation":"orthogonal",
  "properties":
     {
@@ -65624,7 +65732,7 @@
          "margin":0,
          "name":"objs2",
          "spacing":0,
-         "tilecount":38,
+         "tilecount":39,
          "tileheight":512,
          "tiles":
             {
@@ -65759,6 +65867,10 @@
              "4":
                 {
                  "image":"exit_gray_front.png"
+                },
+             "40":
+                {
+                 "image":"heart.png"
                 },
              "5":
                 {

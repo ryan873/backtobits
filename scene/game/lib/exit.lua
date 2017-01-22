@@ -33,6 +33,7 @@ function M.new( instance )
 	instance:setSequence( "noise" )
   instance.map = map
   instance:play()
+  
 
   
 	if not instance.bodyType then
@@ -49,7 +50,7 @@ function M.new( instance )
         transition.to( self, { time = 400, xScale = 1, yScale = 1, transition = easing.inQuad, onComplete = function()
           fx.fadeOut( function()
             audio.fadeOut( { time = 1000 } )
-            composer.gotoScene( "scene.refresh", { params = { map = self.map, beat = scene.beat, score = scene.score:get() } } )
+            composer.gotoScene( "scene.refresh", { params = { map = self.map, beat = scene.beat, hearts = scene.shield:get(), score = scene.score:get() } } )
           end )
         end } )
 			end } )

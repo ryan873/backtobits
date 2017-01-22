@@ -5,6 +5,7 @@ local fx = require( "com.ponywolf.ponyfx" )
 
 -- Define module
 local M = {}
+local composer = require( "composer" )
 
 function M.new( options )
 
@@ -18,19 +19,47 @@ function M.new( options )
 	-- Create display group to hold visuals
 	local group = display.newGroup()
 	local hearts = {}
-	for i = 1, max do
-		hearts[i] = display.newImageRect( "scene/game/img/shield.png", w, h )
-		hearts[i].x = (i-1) * ( (w/2) + spacing )
-		hearts[i].y = 0
-		group:insert( hearts[i] )
-    if not hearts[i].breathing then
-      timer.performWithDelay(i*500,
-        function()
-          fx.breath(hearts[i], 0.1, 500)
-        end)
+  
+	-- Get scene and sounds
+	local scene = composer.getScene( composer.getSceneName( "current" ) )
+	local sounds = scene.sounds
+  
+  function group:boostHearts()
+    for i=1,max do
+      display.remove(hearts[i])
     end
-	end
-	group.count = max
+    max = max + 1
+    group:makeHearts()
+  end
+  
+  
+  function group:makeHearts()
+    local row = 0
+    local rowlength = 4
+    for i = 1, max do
+      hearts[i] = display.newImageRect( "scene/game/img/shield.png", w, h )
+      group:insert( hearts[i] )
+      local col = (i-1) % rowlength
+      if col == 0 and i > rowlength then row = row + 1 end
+      hearts[i].x = col * ( (w/2) + spacing )
+      hearts[i].y = row * ( spacing * 1.6 ) --0
+      hearts[i].alpha = 0
+      timer.performWithDelay((i-1)*250,
+        function()
+          hearts[i].xScale = 0.1
+          hearts[i].yScale = 0.1
+--          audio.play( sounds.pbr )
+          transition.to(hearts[i],{alpha=1,xScale=1,yScale=1,time=500,transition=easing.inOutQuad})
+        end)
+      if not hearts[i].breathing then
+        timer.performWithDelay(i*500,
+          function()
+            fx.breath(hearts[i], 0.1, 500)
+          end)
+      end
+    end
+    group.count = max
+  end
 
 	function group:damage( amount )
 		group.count = math.min( max, math.max( 0, group.count - ( amount or 1 ) ) )
@@ -49,15 +78,23 @@ function M.new( options )
  	return group.count
 	end
 
-	function group:heal( amount )
-		self:damage( -( amount or 1 ) )
+	function group:heal( amount, container )
+    if container == true then
+      group:boostHearts()
+    else
+      self:damage( -( amount or 1 ) )
+    end
 	end
+
+  function group:get() return max or 0 end
+
 
 	function group:finalize()
 		-- On remove, cleanup instance 
 	end
 	group:addEventListener( "finalize" )
 
+  group:makeHearts()
 	-- Return instance
 	return group
 end
