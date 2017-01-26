@@ -130,18 +130,21 @@ function scene:create( event )
 	score.x = display.contentWidth - score.contentWidth / 2 - 32 - gem.width
 	score.y = display.screenOriginY + score.contentHeight / 2 + 32
 
-  scene.tracks = tracks.new( {} )
+  if scene.tracks == nil then
+    scene.tracks = tracks.new( {} )
+  end
+  
   local tracks = scene.tracks
   tracks.x = display.contentWidth/2 - tracks.width/2
   tracks.y = score.y - 16
 
 	-- Add our hearts module
   local hearts = event.params.hearts or 3
-	shield = heartBar.new({max=hearts,spacing=32})
+	scene.shield = heartBar.new({max=hearts,spacing=32})
+  local shield = scene.shield
 	shield.x = 48
 	shield.y = 48 --display.screenOriginY + shield.contentHeight / 2 + 16
 	hero.shield = shield
-  scene.shield = shield
 
 	-- Touch the sheilds to go back to the main...
   --[[

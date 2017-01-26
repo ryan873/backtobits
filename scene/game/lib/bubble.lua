@@ -14,7 +14,7 @@ function M.new( instance )
 
 	instance._y = instance.y
   
-  delayRandom = (math.random(15)*1000) + (13440 - instance._y)
+  delayRandom = (math.random(7)*1000) + (13440 - instance._y)
   
 	transition.to( instance, { delay = delayRandom, y = instance._y - 13440, transition = easing.inQuad, time = 30000 } )
 

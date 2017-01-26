@@ -38,6 +38,7 @@ function M.new( instance, options )
 		{ name = "ouch", frames = { 8, 8, 8, 8, 8 } },
 		{ name = "swim", frames = { 11, 12, 13, 14 }, time = 666, loopCount = 0 },
 		{ name = "slide", frames = { 17, 18 }, time = 666, loopCount = 0 },
+		{ name = "tumble", frames = { 9, 10, 19, 20 }, time = 222, loopCount = 0 },
 	}
 	instance = display.newSprite( parent, sheet, sequenceData )
 	instance.x,instance.y = x, y
@@ -51,7 +52,7 @@ function M.new( instance, options )
     instance.jumping = true
   else
     heroFriction = 0.0
-    heroBounce = 0.76
+    heroBounce = 0.3
     instance:setSequence( "slide" )
     instance:play()
   end
@@ -91,7 +92,7 @@ function M.new( instance, options )
           instance:setSequence( "walk" )
           instance:play()
         else
-          instance:setSequence( "slide" )
+          instance:setSequence( "tumble" )
           instance:play()
         end
         

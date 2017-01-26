@@ -3,6 +3,30 @@
  "layers":[
         {
          "draworder":"topdown",
+         "height":26,
+         "name":"background",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "width":38,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":26,
+         "name":"clouds",
+         "objects":[],
+         "opacity":0.490000009536743,
+         "type":"objectgroup",
+         "visible":false,
+         "width":38,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "height":38,
          "name":"title",
          "objects":[
@@ -138,27 +162,27 @@
             {
              "0":
                 {
-                 "image":"buttonHelp.png"
+                 "image":"..\/menu\/ui\/buttonHelp.png"
                 },
              "1":
                 {
-                 "image":"buttonStart.png"
+                 "image":"..\/menu\/ui\/buttonStart.png"
                 },
              "3":
                 {
-                 "image":"title.png"
+                 "image":"..\/menu\/ui\/title.png"
                 },
              "6":
                 {
-                 "image":"block.png"
+                 "image":"..\/menu\/ui\/block.png"
                 },
              "7":
                 {
-                 "image":"buttonCredits.png"
+                 "image":"..\/menu\/ui\/buttonCredits.png"
                 },
              "8":
                 {
-                 "image":"creditsBackground.png"
+                 "image":"..\/menu\/ui\/creditsBackground.png"
                 }
             },
          "tilewidth":1334
@@ -175,7 +199,7 @@
             {
              "0":
                 {
-                 "image":"help.png"
+                 "image":"..\/menu\/ui\/help.png"
                 }
             },
          "tilewidth":1334

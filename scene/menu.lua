@@ -53,9 +53,21 @@ function scene:create( event )
 	function help:tap()
     audio.play(buttonSFX)
 		ui:findLayer( "help" ).isVisible = not ui:findLayer( "help" ).isVisible
+		ui:findLayer( "credits" ).isVisible = false
 	end
 	help:addEventListener( "tap" )
 
+  
+	-- Find the credits button
+	local credits = ui:findObject( "credits" )
+	function credits:tap()
+    audio.play(buttonSFX)
+		ui:findLayer( "credits" ).isVisible = not ui:findLayer( "credits" ).isVisible
+		ui:findLayer( "help" ).isVisible = false
+	end
+	credits:addEventListener( "tap" )
+  
+  
 	-- Transtion in logo
 	transition.from( ui:findObject( "logo" ), { xScale = 2.5, yScale = 2.5, time = 333, transition = easing.outQuad } )
 
