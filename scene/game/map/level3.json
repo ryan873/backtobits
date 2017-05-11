@@ -3,6 +3,18 @@
  "layers":[
         {
          "draworder":"topdown",
+         "height":420,
+         "name":"crown",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":160,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "height":40,
          "name":"background",
          "objects":[
@@ -581,6 +593,18 @@
                  "width":256,
                  "x":4448,
                  "y":4000
+                }, 
+                {
+                 "gid":26,
+                 "height":8192,
+                 "id":5662,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8192,
+                 "x":-1536,
+                 "y":14816
                 }],
          "opacity":0.189999997615814,
          "type":"objectgroup",
@@ -12494,12 +12518,12 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":80,
          "x":0,
          "y":0
         }],
- "nextobjectid":5662,
+ "nextobjectid":5663,
  "orientation":"orthogonal",
  "properties":
     {
@@ -12526,8 +12550,8 @@
          "margin":0,
          "name":"objs2",
          "spacing":0,
-         "tilecount":25,
-         "tileheight":512,
+         "tilecount":26,
+         "tileheight":1024,
          "tiles":
             {
              "0":
@@ -12602,6 +12626,10 @@
                 {
                  "image":"heart.png"
                 },
+             "25":
+                {
+                 "image":"crown.png"
+                },
              "3":
                 {
                  "image":"exit_gray_back.png"
@@ -12631,7 +12659,7 @@
                  "image":"exit_pink_back.png"
                 }
             },
-         "tilewidth":512
+         "tilewidth":1024
         }],
  "tilewidth":32,
  "version":1,
